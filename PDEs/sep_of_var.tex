@@ -1,0 +1,266 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+% This is a package to accept utf8 input.  I normally do not use it in my documents, but it was here by default in Overleaf.
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% These three packages are from the American Mathematical Society and includes all of the important symbols and operations 
+\usepackage{fullpage}
+% By default, an article has some vary large margins to fit the smaller page format.  This allows us to use more standard margins.
+
+\setlength{\parskip}{1em}
+% This gives us a full line break when we write a new paragraph
+
+\usepackage{parskip}
+% This stops new paragraphs from being indented
+\usepackage{xcolor}
+\begin{document}
+
+\section{Separation of Variables}
+
+The method separation of variables relies upon the assumption that a function fo the form:
+\begin{flalign}
+	u(x,t) = \phi(x) \, G(t) \label{eq 1}
+\end{flalign}
+
+will be a solution to a linear homogeneous PDE. Let's look at an example.
+
+\textbf{Example 1}
+\begin{flalign}
+	\dfrac{\partial u}{\partial t} = K \dfrac{\partial ^2 u}{\partial x^2} \; \; \; \;
+		u(x,o) = f(x), \; \; \; \; u(0,t) = u(L,t) = 0 \label{eq 2}
+\end{flalign}
+
+Let's plug \eqref{eq 1} into the given equation.
+\begin{flalign}
+	\dfrac{\partial}{\partial t} \phi(x)\,  G(t) &= K \dfrac{\partial ^2}{\partial x^2} \, \phi(x) G(t) \\
+	\phi(x) \frac{d}{dt} \, G(t) &= K G(t) \frac{d^2}{dx^2} \, \phi(x) \label{eq 4}
+\end{flalign}
+
+In equation \eqref{eq 4}, we factored out terms not relvant to the derivative, transforming it from
+partial derivatives to normal derivatives. 
+
+At this point, we want all the $t$'s on one side and all the $x$'s on the other side.
+Dividing by $\phi(x) \, G(t)$, produces the desired result. 
+\begin{flalign}
+	\dfrac{1}{G} \, \dfrac{dG}{dt} &= K \dfrac{1}{\phi} \; \dfrac{d^2 \phi}{dx^2} \\
+	\dfrac{1}{K\, G} \, \dfrac{dG}{dt} &= \dfrac{1}{\phi} \; \dfrac{d^2 \phi}{dx^2} \label{eq 6}
+\end{flalign}
+In equation \eqref{eq 6}, we're diving by $K$, this is done for convenience down the road. 
+
+For these to be equal, given they have different variables, they must both equal the same constant.
+Therefore, we can write:
+\begin{flalign}
+	\dfrac{1}{KG} \, \dfrac{dG}{dt} = \dfrac{1}{\phi} \, \dfrac{d^2 \phi}{dx^2} = - \lambda \label{eq 7}
+\end{flalign}
+Let's rewrite \eqref{eq 7} as two ODEs:
+\begin{flalign}
+	\dfrac{dG}{dt} \; &= \; - \lambda KG \label{eq 8} \\
+	\dfrac{d^2 \phi}{dx^2} \; &= \; -\lambda \phi \label{eq 9}
+\end{flalign}
+
+Let's apply the left BC: $u(0,t) = 0$
+\begin{flalign}
+	u(0,t) = \phi(0) \, G(t) = 0
+\end{flalign}
+Recall the trivial solution is when $u(x,t) = 0$. To avoid this trivial solution, we have to set $\phi(0)=0$.
+Otherwise, $G(t)$ would have to be 0 for all $t$, resulting in the trivial solution. 
+
+Apply the right BC: $u(L,t) = 0$ 
+\begin{flalign}
+	u(L,t) = \phi(L) \, G(t) = 0 \label{eq 11}
+\end{flalign}
+Using similar logic as for the left BC to avoid the trivial solution, we set $\phi(L) = 0$. 
+
+Recapping what we've done so far, we've transformed the given problem into two ODEs.  One ODE is to solve for 
+the time derivative, and the other ODE is to solve the spatial derivative. Additionally, we were able to 
+infer that both boundary conditions equal 0. \\*
+\linebreak
+
+\textbf{Example 2}
+\begin{flalign}
+	\dfrac{\partial u}{\partial t} = K \dfrac{\partial ^2 u}{\partial x^2} \; \; \; \;
+		u(x,o) = f(x), \; \; \; \frac{\partial u}{\partial x}(0,t) \, = \, 
+		\frac{\partial u}{\partial x} (L,t) = 0
+\end{flalign}
+This is an example with no sources and perfectly insulated boundaries. So, let's assume a solution of the 
+following form.
+\begin{flalign}
+	u(x,t) = \phi(x) \, G(t) \label{2.1}
+\end{flalign}
+Similar to the prior problem, let's plug the given equation into \eqref{2.1}.
+\begin{flalign}
+	\dfrac{\partial}{\partial t} \phi(x) G(t) &= K \dfrac{\partial ^2}{\partial x^2} \, \phi(x) G(t) \\
+	\phi(x) \dfrac{d}{dt} G(t) &= K \, G(T) \, \dfrac{d^2}{dx^2} \, \phi(x) \label{eq 2.3} \\
+	 \dfrac{1}{K \, G} \dfrac{d}{dt} G(t) &= \dfrac{1}{\phi(x)} \, \dfrac{d^2}{dx^2} \, \phi(x) \\
+	&= - \lambda \label{eq 2.4}
+\end{flalign}
+In equation \eqref{eq 2.3} we factored out the constant so we could rewrite it as a normal derivative. 
+In equation \eqref{eq 2.4}, we divided by $\phi(x) G(t)$ and $K$ for conveneience, and set it equal to 
+a constant $-\lambda$. 
+
+Let's rewrite \eqref{eq 2.4} as two ODEs.
+\begin{flalign}
+	\dfrac{d}{dt} G = -\lambda KG \\
+	\dfrac{d^2}{dx^2} \phi = -\lambda \phi
+\end{flalign}
+
+Let's check the BCs, starting with the left BC
+\begin{flalign}
+	&\dfrac{\partial (G(t) \, \phi(x))}{\partial x} (0,t) = 0 \\
+\end{flalign}
+To avoid the trivial solution, we'll set $\frac{d}{dx} \phi(0) = 0$. 
+
+Apply the right BC:
+\begin{flalign}
+	\dfrac{\partial (G(t) \, \phi(x))}{\partial x} (L,t) = 0 \\
+	G(t) \, \dfrac{d}{dx} \, \phi(L) = 0
+\end{flalign}
+
+To avoid the trivial solution, we'll set $\dfrac{d}{dx} \phi(L) = 0$. 
+
+Let's recap what we found. We transformed the PDE to two ODEs, and found the derivatives of both BCs are equal to 0. 
+\begin{flalign}
+	\dfrac{d}{dx} \phi(0) = 0 \\
+	\dfrac{d}{dx} \phi(L) = 0
+\end{flalign}
+
+\pagebreak[4]
+\section{Solving the Heat Equation}
+
+Let's look at the given problem.
+\begin{flalign}
+	\dfrac{\partial u}{\partial t} = K \dfrac{\partial ^2 u}{\partial x^2} \; \; \; \;
+		u(x,o) = f(x), \; \; \; u(0,t) = u(L,t) = 0
+\end{flalign}
+
+We've seen this problem in the prior section.  The two ODEs we need are:
+\begin{flalign}
+	\dfrac{dG}{dt} = -K \lambda G \\
+	\dfrac{d^2 \phi}{dx^2} + \phi \lambda = 0
+\end{flalign}
+and the BCs are: $\phi(0) = 0$ and $\phi(L) = 0$. 
+
+At this point, we have two ODEs to solve. 
+
+Let's solve the spatial differential equation first.  Notice, the spatial differential equation is very similar to the first
+example in the eigenvalues and eigenfunctions section (i.e. $y'' + \lambda y = 0$).  So, following a similar method from that
+section, we'll solve for three different cases of $\lambda$: $\lambda > 0, \lambda = 0 $, and $\lambda < 0$. 
+
+\textbf{Case 1: $\lambda > 0$}
+\begin{flalign}
+	r^2 + \lambda = 0 \\
+	r_{1,2} = \pm \sqrt{\lambda} \; i
+\end{flalign}
+
+The general solution for complex roots is:
+\begin{flalign}
+	\phi(x) = c_1 e^{a \, x} \, cos(ux) + c_2 e^{a \, x} \,sin(ux)
+\end{flalign}
+Where the roots are written as: $r_{1,2} = a \pm u \, i$.  So, in this case, the $e^{a \, x}$ term falls away 
+because $a = 0$. 
+
+Apply the first BC: $u(0, t) = 0$ 
+\begin{flalign}
+	\phi(0) &=  c_1 \, cos(0) + c_2 sin(0) \\
+	&\implies 0 = c_1
+\end{flalign}
+
+Apply the second BC: $u(L,t) = 0$
+\begin{flalign}
+	\phi(L) = c_2 \, sin(\sqrt{\lambda} \, L) 
+\end{flalign}
+In the above equation, $c_1 cos(ut)$ falls away because $c_1 = 0$. Since we're after the non-trivial solution,
+we want:
+\begin{flalign}
+	&sin(\sqrt{\lambda} \, L) = 0 \\
+	&\implies \sqrt{\lambda} \, L = n \pi \; \; \; \; \forall \; \; n = 1,2,3,... \\
+	&\lambda = \left(\dfrac{n \pi}{L} \right)^2
+\end{flalign}
+
+Plugging this into the formla for the general solution, we get the following:
+\begin{flalign}
+	\phi(x) = sin \left(\dfrac{n \pi x}{L}\right) \; \; \; \; \forall \; n = 1,2,3,...
+\end{flalign}
+Notice the $c_2$ term is not written explicity - that's because we'll absorb it into another
+constant later.
+
+\textbf{Case 2: $\lambda = 0$}
+\begin{flalign}
+	0 &= r^2 + \lambda \\
+	r^2 &= 0
+\end{flalign}
+Integrating twice results in(we're integrating because we need the value of $r$, not $r^2$):
+\begin{flalign}
+	r  = c_1 + c_2x
+\end{flalign}
+Applying the first BC: $\phi(0) = 0$
+\begin{flalign}
+	0 = \phi(0) = c_1
+\end{flalign}
+Apply the second BC: $\phi(L) = 0$
+\begin{flalign}
+	0 &= \phi(L) = c_2L \\
+	&\implies c_2 = 0
+\end{flalign}
+Takeaway: only the trivial solution is possible in this case
+
+\textbf{Case 3: $\lambda < 0 $}
+\begin{flalign}
+	0 &= r^2 - \lambda \\
+	r &= \pm \sqrt{\lambda}
+\end{flalign}
+Recall the usual general solution for real distinct roots is:
+\begin{flalign}
+	\phi(x) = c_1e^{r_1x} + c_2 e^{r_2x}
+\end{flalign}
+but we can rewrite this in hyperbolic form:
+\begin{flalign}
+	\phi(x) = c_1 cosh(a \, x) + c_2 sinh(a \, x)
+\end{flalign}
+where $r_1 = a$ and $r_2 = a$.  Therefore, we can write the following:
+\begin{flalign}
+	\phi(x) = c_1 \, cosh(\sqrt{- \lambda} x) + c_2 sinh(\sqrt{- \lambda} x)
+\end{flalign}
+
+Let's apply the first BC:
+\begin{flalign}
+	0 &= \phi(0) = c_1 \, cos(0) + 0 \\
+	&\implies c_1 = 0
+\end{flalign}
+Applying the second BC:
+\begin{flalign}
+	0 = \phi(L) = c_2 \, sinh(\sqrt{-\lambda} \, L)
+\end{flalign}
+To avoid the trivial solution we need to avoid setting $c_2 = 0$.  We are already assuming that $\lambda < 0$ and that means
+$L \, \sqrt{-\lambda} \ne 0$, meaning $sinh(L \, \sqrt{-\lambda}) \ne 0$. Therefore, we must have $c_2 = 0$, resulting 
+in the trivial solution.
+
+Finally, the complete list of eigenvalues and eigenfunctions for the spatial differnetial equation are:
+\begin{flalign}
+	\lambda _n &= \left(\dfrac{n \pi}{L}\right)^2 \\
+	\phi(x) &= sin\left( \dfrac{n \pi x}{L}\right) \; \; \; \; \forall \; n=1,2,3,...
+\end{flalign}
+
+Now, let's solve the time differential equation.
+\begin{flalign}
+	\dfrac{dG}{dt} = -K \lambda _n G
+\end{flalign}
+This is a first order, linear, separable differential equation with the following solution:
+\begin{flalign}
+	G(t) &= ce^{-K \lambda_n t)} \\
+	&= ce^{-K (\frac{n \pi}{L})^2 \, t}
+\end{flalign}
+In the last equation, we're plugging in $\lambda = (\frac{n \pi}{L})^2$  
+
+We've solved both the differential equations so we can write down a solution.
+\begin{flalign}
+	u_n(x,t) &= \phi(x) \, G(t) \\
+	&= B_n \, sin\left(\dfrac{n \pi x}{L} \right) \, e^{-K \, (\frac{n \pi}{L})^2 \, t} \; \; \; \; \forall \; n=1,2,3,...
+\end{flalign}
+We changed $c$ in the solution to the time differential equation to $b_n$ to denote it will probably be different
+for each value of $n$.  
+
+\end{document}

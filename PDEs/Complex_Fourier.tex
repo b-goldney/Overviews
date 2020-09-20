@@ -1,0 +1,259 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+% This is a package to accept utf8 input.  I normally do not use it in my documents, but it was here by default in Overleaf.
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% These three packages are from the American Mathematical Society and includes all of the important symbols and operations 
+\usepackage{fullpage}
+% By default, an article has some vary large margins to fit the smaller page format.  This allows us to use more standard margins.
+
+\setlength{\parskip}{1em}
+% This gives us a full line break when we write a new paragraph
+
+\usepackage{parskip}
+% This stops new paragraphs from being indented
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{Complex Definitions of Sine and Cosine}  
+The goal of this section will be to write $cosine$ and $sine$ as functions of $e$ and $i$, where 
+$i$ is an imaginary number.  
+
+\linebreak
+
+Let's begin by defining Euler's formula,  
+\begin{flalign}
+	e^{i \theta} = cos(\theta) + i \, sin(\theta) \label{eq1}
+\end{flalign}
+
+\textbf{Step 1:} rewrite \eqref{eq1} twice. \\*
+ We'll rewrite it once by plugging-in $z$ for $\theta$ and  a second time by plugging-in$-z$ for $\theta$. 
+
+\begin{flalign}
+	e^{iz} &= cos(z) + i \, sin(z) \label{eq2} \\
+	e^{-iz} &= cos(-z) + i \, sin(-z) \label{eq3}
+\end{flalign}
+
+Now we can solve for $cos(-z)$ and $sin(-z)$. \\* 
+
+\linebreak
+\textbf{Step 2:}  Solve for cos(-z) \\* 
+We can solve for $cos(-z)$ by rewriting \eqref{eq2} and \eqref{eq3}.  
+
+\begin{flalign}
+cos(z) + i \, sin(z) &= e^{iz} \label{eq4} \\
+cos(z) - i \, sin(z) &= e^{-iz} \label{eq5}	
+\end{flalign}
+
+To clarify what happened, \eqref{eq4} is simply \eqref{eq2} rewritten.  Equation \eqref{eq5} is simply \eqref{eq3} rewritten,
+using the following facts: $cos(-z) = cos(z)$ and $sin(-z) = - sin(z)$.  
+
+\textbf{Step 3: } Add \eqref{eq4} and \eqref{eq5} together.  
+
+\begin{flalign}
+2 \, cos(z) \, &= \, e^{iz} + e^{-iz} \label{eq6} \\
+cos(z) \, &= \, \dfrac{e^{iz} + e^{-iz}}{2} \label{eq7}
+\end{flalign}
+
+Equation \eqref{eq7} is the complex definition of $cosine$.  
+
+\linebreak
+\textbf{Step 4: } Let's solve for sin(z) \*
+
+\begin{flalign}
+	cos(z) + i \, sin(z) &= e^{iz} \label{eq8} \\
+	- cos(z) + i \, sin(z) &= - e^{-iz} \label{eq9}
+\end{flalign}
+
+At this point, \eqref{eq8} is simply \eqref{eq4}, and \eqref{eq9} is \eqref{eq5} multiplied by $-1$.  
+Let's add \eqref{eq8} and \eqref{eq9}.  
+\begin{flalign}
+	2 \, i \, sin(z) \, &= \, e^{iz} + e^{-iz} \\
+	sin(z) &= \dfrac{e^{iz} + e^{-iz}}{2i} \label{eq11}
+\end{flalign}
+
+Equation \eqref{eq11} is the definition of complex $cosine$.
+
+\pagebreak[4]
+\section{Taylor Series for Cosine and Sine} 
+The goal of this section to show how $cosine$ and $sine$ are odd and even functions, respectively.  
+
+\linebreak  
+
+\begin{flalign}
+	f(x) = f(a) + f'(a)(x-a) + \dfrac{f''(a)}{2!} (x-a)^2 + \dfrac{f'''(a)}{3!} (x-a)^3
+		+ \, \ldots \, \dfrac{f^n(a)}{n!}(x-a)^n
+\end{flalign}
+
+\textbf{First, we'll look at sin(x)} \\*
+Let's take the derivatives of $sin(x)$ at $x=0$.  
+\begin{flalign*}
+	f(0) = sin(0) = 0, \; \; \; f'(0) = cos(0) = 1, \; \; \; f''(0) = -sin(0) = 0 \\
+	f'''(0) = -cos(0) = -1, \; \; \; f^{(4)}(0) = sin(0) = 0, f^{(5)}(0) = cos(0) = 1
+\end{flalign*}
+
+We can see the pattern that clearly emerges.  Let's plug these derivatives into the Taylor Series 
+formula and set $x=0$ and $x=a$. 
+
+\begin{flalign}
+	f(x) &= 0+ 1*(x-0) + 0 - \dfrac{1 \, (x-0)^3}{3!} + 0 + \dfrac{1 \, (x-0)^5}{5!} \\ 
+	&= x - \dfrac{x^3}{3!}+\dfrac{x^5}{5!} + ...
+\end{flalign}
+
+From here we can see that $sin$ is an odd function.
+
+\linebreak
+\textbf{Let's look at cos(x)} \\ 
+Similar to the process for $sin(x)$, let's take the derivatives and plug-in $x=0$.
+
+\begin{flalign*}
+	f(0) = cos(0) = 1, \, \, \, f'(0) = -sin(0) = 0, \, \, \, f''(0) = -cos(0) = -1 \\
+	f'''(0) = sin(0) = 0, \, \,\, f^{(4)}(0) = cos(0) = 1
+\end{flalign*}
+
+Let's plug the derivatives into the Taylor Series formula. 
+\begin{flalign}
+	f(x) = 1 - \dfrac{x^2}{2!} + \dfrac{x^4}{4!} - \dfrac{x^6}{6!} + ...
+\end{flalign}
+Remember that the $x-a$ terms in the Taylor Series fall away becaus we set $x=a$.  
+
+\pagebreak[4]
+\section{Integral of $e^{ikx}$ from $-\pi$ to $\pi$} 
+
+\begin{flalign*}
+	\int_{-\pi}^\pi e^{i \, k \, x} \, dx
+\end{flalign*}
+
+There are two cases to consider: \\*
+\begin{enumerate}
+	\vspace{-0.6cm}	\item $k = 0$ \\
+	\vspace{-0.6cm}\item $k \ne 0$
+\end{enumerate}
+
+Let's begin by looking at case 1.
+
+\begin{flalign}
+	&\int_{-\pi}^\pi e^{i \, 0 \, x} \, dx \\
+	&= \int_{-\pi}^\pi e^0 \, dx \\
+	&= \pi - (- \pi) \\
+	&= 2 \pi
+\end{flalign}
+
+Now, let's look at case 2.
+\begin{flalign}
+	&\int_{-\pi}^\pi \, e^{i \, k \, x} \, dx \\
+	&= \dfrac{1}{ik} e^{i \, k \, x} \bigg|_{-\pi}^\pi \label{eq45} \\
+	&= \dfrac{1}{i \, k} e^{i \, k \, \pi} - \dfrac{i}{i \, k} e^{i \, k \, (- \pi)} \label{eq46} \\
+	&= \dfrac{1}{i \, k}  \bigg[ \, \underbrace{(cos(\pi \, k) + i \, sin(k \, \pi)}_\text{Term 1})
+		 - \underbrace{ (cos(-k \, \pi) + i \, sin(-k \, \pi))}_\text{Term 2} \bigg] \label{eq47} 
+\end{flalign}
+
+To get to  \eqref{eq47} we have to recall Euler's formula.
+\begin{flalign}
+	e^{i\theta} = cos(\theta) + i \, sin(\theta) \label{eq48}
+\end{flalign}
+
+We can replace the $k \pi$ terms in \eqref{eq46} with $\theta$.  Notice, Term 1 and Term 2 are just the LHS of 
+\eqref{eq48}. By replacing Term 1 and Term 2 in \eqref{eq46} with the RHS of \eqref{eq48}, we get to equation \eqref{eq47}.   
+In \eqref{eq47}, notice the $cosine$ terms cancel because $cosine$ is an even function (i.e. $cos(-\pi) = cos(\pi)$).
+  The $sine$ terms are always 0 bceause they're integer multiples of $\pi$.  
+
+Therefore, rewriting \eqref{eq47} we have:
+\begin{flalign}
+	&= \dfrac{1}{ik} [ (0+0) - (0+0)] \\
+	&= 0
+\end{flalign}
+
+
+
+\pagebreak[4]
+
+\section{Complex Fourier Series}  
+
+Let's begin by defining the Fourier Series
+\begin{flalign}
+	f(x) = A_0 + \sum_{n=1}^\infty A_n \, cos(nx) + \sum_{n=1}^\infty b_n \, sin(nx) \label{eq51}
+\end{flalign}
+
+Before trying to rewrite this as a complex equation, let's recall the complex definitions of 
+$sine$ and $cosine$. 
+
+\begin{flalign}
+	cos(\theta) &= \dfrac{e^{i \theta} + e^{- i \theta}}{2} \label{eq52} \\
+	sin(\theta) &= \dfrac{e^{i \theta} - e^{-i \theta}}{2i} \label{eq53} \\
+		&= \dfrac{i[-e^{i \theta}+e^{-i \theta}]}{2} \label{eq54}
+\end{flalign}
+
+We wrote \eqref{eq54} by multiplying the numerator and denominator in \eqref{eq53} by $i$. Recall $i*i = -1$ so
+we distributed the negative sign through the numerator. 
+
+\linebreak
+Let's rewrite \eqref{eq51} using \eqref{eq52} and \eqref{eq54}.  
+
+\begin{flalign}
+	f(x) = A_0 + \sum_{n=1}^\infty A_n \bigg[ \dfrac{e^{inx} + e^{-inx}}{2} \bigg] +
+		\sum_{n=1}^\infty b_n \bigg[\dfrac{-i \, e^{inx} + i \, e^{-inx}}{2} \bigg]
+\end{flalign}
+
+Notice, we have similar terms.  We have two $e^{inx}$ terms and two $e^{-inx}$ terms. Let's collect like terms
+by removing the negative sign from the second exponential.  
+
+\begin{flalign}
+	f(x) = A_0 + \sum_{n=1}^\infty \underbrace{\dfrac{A_n - b_n \, i}{2} e^{inx}}_\text{Term 1} + 
+		\sum_{n=1}^\infty \underbrace{\dfrac{A_n + b_n \, i}{2} e^{-inx}}_\text{Term 2}
+\end{flalign}
+
+Notice that Term 1 and Term 2 are the same except for a negative symbol in Term 2. Let's rewrite Term 2 
+by reindexing it from $n$ to $-n$. Therefore, Term 2 becomes:
+
+\begin{flalign*}
+	\sum_{n=-\infty}^{-1} \dfrac{A_{-n} + b_{-n} \, i}{2} \, e^{inx}
+\end{flalign*}
+
+Now, we have the same $e$ terms. The summation has $-\infty$ at the bottom of the summation because we always write the smallest term at the bottom.
+We wrote $e^{inx}$ because the negatives cancel out in $e^{-i \, -n \, x}$.
+
+Now, both Term 1 and Term 2 have the same $e^{inx}$ term, we can combine the summations. 
+
+\newline
+Let's rewrite the terms.
+\begin{flalign}
+	f(x) = \underbrace{A_0}_\text{Term 1} + \sum_{n=1}^\infty 
+		\underbrace{\dfrac{A_n - i \, b_n}{2} e^{inx}}_\text{Term 2} + \sum_{n=-\infty}^{-1} 
+		\underbrace{\dfrac{A_{-n}+i \, b_{-n}}{2} e^{inx}}_\text{Term 3}
+\end{flalign}
+
+Let's set Term 1 = $C_0$ and Terms 2 and 3 equal to $C_n$.  This raises the question, how can we set two seemingly
+different terms to the same variable?  Notice, terms 2 and 3 have $n$'s in all the same places.  So, we can 
+write it as the following:
+
+\newline
+\colorbox{yellow}{Need to confirm details of how to get from equation 33 to 34}
+\begin{flalign}
+	f(x) = \sum_{-\infty}^\infty C_n e^{inx}
+\end{flalign}
+
+Now, we need to figure out what $C_n$ is. Let's multiply the above equation by $e^{-imx}$ and then integrate.
+
+\begin{flalign}
+	\int_{-\pi}^\pi f(x) e^{-imx} \, dx \; &= \; \sum_{n=-\infty}^\infty C_n \int_{-\pi}^\pi e^{inx} e^{-imx} dx \label{eq58}\\
+	&= 2 \pi C_m \label{eq59}
+\end{flalign}
+
+There are two cases for the RHS of \eqref{eq58}. If $n \ne m$ then it equals 0, and if $n=m$ then it equals $2 \pi$,
+which is how we arrived at \eqref{eq59}. We're playing fast and loose with the subscripts for $m$ and $n$, which is simply
+because we're only dealing with the case where $m=n$ because the integral is 0 otherwise.
+
+
+
+Therefore, we can isolate the $C_n$ and define it as:
+\begin{flalign}
+	C_n = \dfrac{1}{2 \pi} \int_{-\pi}^\pi f(x) e^{-inx} dx
+\end{flalign} 
+
+
+\end{document}

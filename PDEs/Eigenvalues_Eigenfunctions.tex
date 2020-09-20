@@ -1,0 +1,281 @@
+\documentclass[12pt]{article}
+  
+\usepackage[utf8]{inputenc}
+% This is a package to accept utf8 input.  I normally do not use it in my documents, but it was here by default in Overleaf.
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% These three packages are from the American Mathematical Society and includes all of the important symbols and operations 
+\usepackage{fullpage}
+% By default, an article has some vary large margins to fit the smaller page format.  This allows us to use more standard margins.
+
+\setlength{\parskip}{1em}
+% This gives us a full line break when we write a new paragraph
+
+\usepackage{parskip}
+% This stops new paragraphs from being indented
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{Eigenvalues and Eigenfunction} \\*
+Recall, for a given square matrix, $A$, with an eigenvalue of $\lambda$ and eigenvector of
+$\overrightarrow{x}$, we can write: 
+\begin{flalign}
+A \overrightarrow{x} \, = \, \lambda \overrightarrow{x}
+\end{flalign}
+
+In order for $\lambda$ to be an eigenvalue then we had to be able to find non-zero solutions to the equation. \\*
+
+This raises the question, how do eigenvalues connect to boundary value problems (BVPs)? Values of $\lambda$ 
+that produce a non-trivial solution will be referred to as eigenvalues, and the non-trivial solutions wil be
+called eigenfunctions.  \\*
+
+
+Let's consider an equation of the following form:
+
+\begin{flalign}
+	y'' \, + \lambda y = 0
+\end{flalign}
+For those values of $\lambda$ that produce a non-trivial solution we will call that an eigenvalue, 
+and the solution itself will be referred to as the eigensolution. \\*
+
+Let's look at a quick example. \\*
+
+\textbf{Example 1: } \\*
+Solve the BVP
+\begin{flalign}
+	y''+4y=0 \; \; \; y(0)=0, \; \; y(\lambda \pi)=0
+\end{flalign}
+
+The characteristic equation is:
+\begin{flalign}
+	0 &= r^2+4 \\
+	r &= 2i
+\end{flalign}
+
+The general solution to complex roots is: 
+\begin{flalign}
+	y(x) = c_1e^{\lambda \, x}cos(ux) + c_2e^{\lambda \, x} sin(ux)
+\end{flalign}
+where the roots are defined as $r_{1,2} \, = \, \lambda \pm u \, i$; so, $\lambda = 0$ and $u=2$ 
+(because $r \, = \, 0 \pm 2 \, i$).  
+Thefore, we can write:
+
+\begin{flalign}
+	y(x) \, = \, c_1 \, cos(2x) + c_2 \, sin(2x)
+\end{flalign}
+
+Let's find $c_1$ and $c_2$ by plugging-in the boundary conditions (BCs). \\*
+
+Apply the first BC: $y(0)=0$
+\begin{flalign}
+	0 = y(0) &= c_1 \, cos(0) + c_2 \, sin(0) \\
+	&= c_1 \,1 + c_2\,0 \\
+	&\implies c_1 = 0
+\end{flalign}
+
+
+Apply the second BC: $y(2 \pi) = 0$
+\begin{flalign}
+	0 =y(2\pi) &= c_1 \, cos(4 \pi) + c_2 \, sin(4 \pi) \\
+	&= c_1 + 0 \\
+	&\implies c_1 = 0
+\end{flalign}
+
+Therefore, $c_2$ is arbitrary and the solution is:
+\begin{flalign}
+	y(x) = c_2 \, sin(2x)
+\end{flalign}
+
+In this example, $\lambda = 4$, and we found a non-trivial solution. Therefore, the eigenvalue is 4, and
+the eigensolution is $y(x) = c_2 \, sin(2x)$.
+
+\textbf{Example 2: } \\*
+Find the eigenvalues and eigensolutions for the BVP.
+
+\begin{flalign}
+	y'' \, + \, 3y = 0 \; \; \; \; \; y(0) = 0, \; \; y(2 \pi) = 0
+\end{flalign}
+
+The characteristic equation is:
+\begin{flalign}
+	0 &= r^2 \, + \, 3 \\
+	r & = \sqrt{3} \, i
+\end{flalign}
+
+The general solution is:
+\begin{flalign}
+	y(x) \, &= \, c_1 e^{\lambda x} cos(ux) \, + \, c_2 e^{\lambda x} sin(ux)  \\
+	&= c_1 cos(\sqrt{3} \, x) + c_2 sin(\sqrt{3} \, t)
+\end{flalign}
+
+Let's apply the BCs. \\*
+
+Apply the first BC: $y(0) = 0$ \\*
+\begin{flalign}
+	0 = y(0) = c_1 \\
+	\implies c_1 = 0
+\end{flalign}
+
+Apply the second BC: $y(2 \pi) = 0$
+\begin{flalign}
+	0 = y(2 \pi) &= 0 + c_2 sin(\sqrt{3} \, 2 \pi) \\
+	&= 0 + c_2(-0.9936) \\
+	&\implies c_2 = 0
+\end{flalign}
+
+Since $c_1 = c_2 = 0$ the solution is $y(x) = 0$, which is obviously trivial.  Therefore, 
+there are no eigenvalues or eigensolutions to this equation. \\*
+
+At this point, we've seen two examples, from the same generalized formula: $y'' + \lambda y = 0$ with 
+the same BCs.  Let's find all the eigenvalues and eigensolutions to this formula.  \\*
+
+\textbf{Example 3} \\*
+Let's generalize the previous two examples by looking at the following formula:
+\begin{align}
+	y'' \, + \, \lambda y = 0
+\end{align}
+
+We'll solve this problem by looking at the following three cases: i) $\lambda > 0 \;$, ii) $\lambda = 0 \;$,
+and iii) $\lambda < 0 \;$. \\*
+
+\textbf{Case 1: $\lambda > 0$} \\*
+
+In this case, the characteristic equation is: 
+\begin{align}
+	0 &= r^2 + \lambda \\
+	r_{1,2} &= \pm \sqrt{- \lambda}
+\end{align}
+
+Since we're assuming $\lambda > 0$, we can write:
+\begin{align}
+	r_{1,2} = \pm \sqrt{\lambda} \, i
+\end{align}
+
+The general solution is: 
+\begin{align}
+	y(x) = c_1 cos(\sqrt{\lambda} \, x) + c_2 sin(\sqrt{\lambda} \, x) \\
+\end{align}
+
+Apply the first BC: $y(0) = 0$ \\*
+\begin{align}
+	0 = y(0) &= c_1 \\
+	\implies c_1 = 0
+\end{algin}
+
+Apply the second BC: $y(2 \pi) = 0$ \\*
+\begin{align}
+	0 = y(2 \pi) &= c_2 sin(2 \pi \sqrt{\lambda})
+\end{align}
+
+This means either $c_2 = 0$ or $sin(2 \pi \sqrt{\lambda})=0$. Remember, we want non-trivial solutions, 
+and if $c_2 = 0$ then that would be the trivial solution.  Therefore, let's assume $c_2 \ne 0$, resulting in:
+\begin{align}
+	0 &= sin(2 \pi \sqrt{\lambda}) \\
+	&\implies 2 \pi \sqrt{\lambda} = n \pi \; \; \; \; \forall n \, = \, 1,2,3,... \\
+	&\implies \lambda = \dfrac{n^2}{4}
+\end{align}
+
+We're taking advantage of the fact that we know where $sin \, = \, 0$ and that $\lambda = 0$ results in
+$2 \pi \sqrt{\lambda} > 0$. \\*
+
+The corresponding eigenvalues and eigenfunctions are:
+\begin{align}
+	&\lambda = \dfrac{n^2}{4} \; \; \; \; \forall \; \; \; \; n = 1,2,3,... \\
+	&y_n(x) = sin\left(\dfrac{nx}{2}\right) 
+\end{align}
+
+\textbf{Case 2: $\lambda = 0$} \\*
+In this case, the BVP becomes;
+\begin{align}
+	y''=0 \;, \; \; \; y(0) = 0 \;, \; \; \; y(2 \pi) = 0
+\end{align}
+
+Integrating twice results in:
+\begin{align}
+	y' &= c_1 \\
+	y &= c_1x + c_2
+\end{align}
+
+Apply the first BC: $y(0) = 0$ 
+\begin{align}
+	0 = y(0) = c_2
+\end{align}
+
+Apply the second BC: $y(2 \pi) = 0$
+\begin{align}
+	0 = y(2 \pi) &= c_1 2 \pi + c_2 \\
+	&\implies c_1 = 0
+\end{align}
+
+Since $c_2$ is already 0, then $c_1$ must be 0 resulting in the trivial solution. 
+
+\textbf{Case 3: $\lambda < 0$} \\*
+The characteristic equation is:
+\begin{align}
+	0 &= r^2 - \lambda  \\
+	r_{1,2} &= \pm \sqrt{\lambda}
+\end{align}
+ 
+The usual general solutions for a differential equation with two distinct real roots is:
+\begin{align}
+	y(x) = c_1 e^{r_1 x} + c_2 e^{r_2 x}
+\end{align}
+but it's more convenient to rewrite that in hyperbolic form:
+\begin{align}
+	y(x) = c_1 cosh(\lambda x) + c_2 sinh(\lambda x)
+\end{align}
+
+Apply the first BC: $y(0) = 0$ \\*
+\begin{align}
+	0 = y(0) &= c_1 cosh(0) + c_2 sinh(0) \\
+	&= c_1 \\
+	&\implies c_1 = 0
+\end{align}
+
+Apply the second BC: $y(2 \pi) = 0$ 
+\begin{align}
+	0 = y(2 \pi) &= c_2 sinh(2 \pi \sqrt{\lambda})
+\end{align}
+
+Since we know that $sinh(2 \pi \sqrt{\lambda}) \ne 0$ we know that $c_2 = 0$. \\*
+
+Takeaway: for this BVP, when $\lambda < 0$, we only have the trivial solution. 
+
+\textbf{Summary: } For all three cases, we have the following eigenvalues and eigensolutions:
+\begin{align}
+	\lambda _n &= \dfrac{n^2}{4} \\
+	 y_n(x) &= sin\left(\dfrac{nx}{2}\right) \; \; \; \; \forall n=1,2,3,...
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,529 @@
+\documentclass[12pt]{article}
+ 
+\oddsidemargin=.35in
+\evensidemargin=.35in
+\parindent=0.35in
+ 
+\usepackage[utf8]{inputenc}
+% This is a package to accept utf8 input.  I normally do not use it in my documents, but it was here by default in Overleaf.
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% These three packages are from the American Mathematical Society and includes all of the important symbols and operations 
+\usepackage{fullpage}
+% By default, an article has some vary large margins to fit the smaller page format.  This allows us to use more standard margins.
+
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+%This lets us number the questions, using more convenient formatting
+
+\setlength{\parskip}{1em}
+% This gives us a full line break when we write a new paragraph
+
+\usepackage{parskip}
+% This stops new paragraphs from being indented
+\usepackage{xcolor}
+
+\usepackage{bigints}
+% This package is for big integral signs
+\begin{document}
+
+\begin{enumerate}[1.]
+\item[1.] Set up an initial-boundary value problem (IBVP) that models the temperature in the bar, in following scenario. Do not solve!\\
+\end{enumerate}
+A metal bar, of length 1 meter and thermal diffusivity 2, is taken out of a 100$^{\circ}$C oven and then fully insulated except for one end, which is placed into a large ice bucket at 0$^{\circ}$C.
+
+\pagebreak[4]
+\begin{enumerate}[2.]
+\item The Dirichlet IBVP for the cable equation is given by
+\end{enumerate}
+ 
+\begin {align*}
+v_t=\alpha^2 v_{xx}-\beta v, \;\;\;\;\; 0<x<L, \,\,\beta>0\\
+v\left(x,0\right)=f\left(x\right), \;\;\;\;\; 0\le x\le L,\\
+v\left(0,t\right)=v\left(L,t\right)=0 \;\;\;\;\; t>0,
+\end{align*}
+\begin{enumerate}[(a)] 
+\item By setting  the time derivative in the differential equation to  zero, solve for the steady state solution.
+\item Solve the IBVP and compare the solution as $t\to \infty$ to that in part (a)
+\end{enumerate}
+
+\textbf{Solutions:} \\
+\vspace{0.2cm}
+\textbf{Part a:}
+
+\textbf{Step 1: } Find the roots
+\begin{flalign}
+	0 &=  a^2 \, r^2 - b \\
+	r^2 &= \dfrac{b}{a^2} \\
+	r &= \pm \sqrt{\frac{b}{a}}
+\end{flalign}
+
+\textbf{Step 2: } Find the general solution \\
+The general solution for real, distinct roots is:
+\begin{flalign}
+	y(x) &= c_1 \, e^{r_1 \, x} \, + \, c_2 e^{r_2 \, x} \label{a4}\\
+	&= c_1 \, e^{\sqrt{\frac{b}{a}} \, x} + c_2 \, e^{-\sqrt{\frac{b}{a}} \, x} \label{a5}
+\end{flalign}
+
+Now, let's plug-in both BCs to equation \eqref{a5}. \\
+\textbf{Step 3: } Plug-in the first BC: $u(0,t)$
+\begin{flalign}
+	0 = y(0) &= c_1 + c_2 \\
+	&\implies c_2 = -c_1
+\end{flalign}
+
+\textbf{Step 4: } Plug-in the second BC: $u(L,t) = 0$
+\begin{flalign}
+	0 = y(L) &= c_1 \, e^{\sqrt{\frac{b}{a}} \, L} + c_2 \,e^{-\sqrt{\frac{b}{a}} \, L} \\
+	&= c_1 \, e^{\sqrt{\frac{b}{a}}} + c_2 \,e^{-\sqrt{\frac{b}{a}} \, L} \\
+	&= c_1 \, (e^{\sqrt{\frac{b}{a}} \, L} -e^{-\sqrt{\frac{b}{a}} \, L}) 
+\end{flalign}
+It's not possible for $e^{\sqrt{\frac{b}{a}} \, L} - e^{-\sqrt{\frac{b}{a}} \, L}$ to equal zero;
+therefore, $c_1$ must equal 0. 
+
+\begin{flalign}
+	\boxed{\hat{v}(x) = 0}
+\end{flalign}
+
+\vspace{2 cm}
+
+\textbf{Part b:} \\
+\textbf{Step 1: } Assume the solution has the following form:
+\begin{flalign}
+	v \, = \, T(t) \, X(x) \label{b1}
+\end{flalign}
+
+\textbf{Step 2: } Substitute \eqref{b1} into the given equation ($V_t = A^2 \, V_{xx} - bv$)
+\begin{flalign}
+	T_t \, X &= a^2 \, T \, X_{xx} - bTX \\
+	\dfrac{T_t}{Ta^2} &= \dfrac{X_{xx}}{x} - \dfrac{b}{a^2} \label{b3} \\
+	\dfrac{T_t}{T \, a^2} + \dfrac{b}{a^2} &= \dfrac{X_{xx}}{X} \\
+	\dfrac{T_t + T \, b}{Ta^2} &= \dfrac{X_{xx}}{X} = C \label{b4}
+\end{flalign}
+In equation \eqref{b3} we divided by $XTa^2$.  In equation \eqref{b4}, we factored out an $a^2$ in 
+the numerator and the denominator on the LHS.  Also, notice the LHS is a function of $T$ and the RHS
+is a function of $X$. The only way for those two equations, which are functions of different variables,
+is for both to equal the same constant.
+
+\textbf{Step 3: } Write out both ODEs \\
+At this point, we have two separate ODEs both equal to the same constant. Let's write out both ODEs,
+and we'll replace $C$ with $-\lambda ^2$ for convenience.  
+
+The first ODE (the time ODE) is: 
+\begin{flalign}
+	0 &= T_T + Tb + \lambda ^2 \, T \, a^2 \\
+	&= T_T + T(b+ \lambda^2 \, Ta^2 \label{b6} \\
+\end{flalign}
+This is simply the LHS of \eqref{b4} rewritten. 
+
+And now the second ODE (the spatial ODE) is: 
+\begin{flalign}
+	0 = X_{xx} + \lambda^2 \, X
+\end{flalign}
+
+\textbf{Step 4: } Solve both ODEs \\
+Let's solve the spatial ODE first. We'll start by finding the characteristic equation.
+\begin{flalign}
+	0 &= r^2 + \lambda^2 \\
+	r^2 &= - \lambda^2 \\
+	r &= \lambda i \label{b10}
+\end{flalign}
+In equation \eqref{b10} we used the following fact: $\sqrt{-\lambda^2} \, = \, \sqrt{i^2 \lambda^2} = \lambda \, i$ \\
+
+This is a complex root.  Recall, the general solution for complex roots is:
+\begin{flalign}
+	y(x) = c_1 \, e^{a x} cos(ux) \, + \, c_2 \, e^{ax} sin(ux) \label{b11}
+\end{flalign}
+where we have: $ r_{1,2} = a \pm ui$. \\
+So, for our characteristic equation the $\lambda$ corresponds to the $u$ in the general equation.  And the $a$ in the 
+general solution corresponds to $0$ in our characteristic equation, because our characteristic equation is technically
+$0 \pm \lambda \, i$. 
+Writing out the general equation we have:
+\begin{flalign}
+	y(x) = c_1 e^{0\,x}cos(\lambda \, x) \, + \, c_2 \, e^{0 \, x} sin(\lambda \, x) \label{b12}
+\end{flalign}
+From here, we can see the exponential terms fall away because they're raised to 0. 
+
+\textbf{Step 5: } Plug-in Boundary conditions \\
+Let's plug-in the first boundary condition, $v(0,t) = 0$, to the general equation.
+\begin{flalign}
+	0 = y(0) &= c_1 cos(0) + c_2 sin(0) \\
+	&\implies c_1 = 0	
+\end{flalign}
+Let's plug-in the second BC, $v(L,t) = 0$, to the general equation.
+\begin{flalign}
+	0 = y(L) = c_2 sin(\lambda L)
+\end{flalign}
+
+At this point, we want to avoid the trivial solution (i.e. $u(x,t) = 0$). Since $c_1$ already equals 0, we 
+don't want to set $c_2 = 0$ because that'd be trivial.  So, we need $sin(\lambda \, L) = 0$, which can be
+achieve by seetting $\lambda \, L = \pi$. 
+\begin{flalign}
+	&\lambda \, L = \pi \\
+	&\lambda = \dfrac{n \pi}{L} \; \; \; \; \forall \; n=1,2,3,...
+\end{flalign}
+The $n$ is because all integer multiples of $\pi$ are 0.  Therefore, the eigenvalues are $\lambda =\frac{n \pi}{L}$
+and the eigenfunction is $sin(\lambda_n \pi)$, where $\lambda_n = \frac{n \pi}{L}$, and we plugged that into the general
+solution (equation \eqref{b12}). \\
+
+Now, let's solve the time ODE.
+\begin{flalign}
+	0 = T_t + T(b+a^2 \, \lambda^2)
+\end{flalign}
+This is a first order, separable, ODE. The solution is:
+\begin{flalign}
+	T = e^{(-b - c^2a^2)+c_1}
+\end{flalign}
+
+Recall, $c_1=0$ so we can drop that. Also, since the solution above is periodic, we excluded the $c_2$ term in the 
+eigensolution (i.e. $sin(\lambda_n \pi))$ because we're absorbig it into $T(t)$. Thus we have the following:
+\begin{flalign}
+	T_n(t) = T_n(0) \, e^{-(b+a^2 \, \lambda_n^2)t}
+\end{flalign}
+Remember, $\lambda = \frac{n \pi}{L} \; \;  \forall \; \;  n=1,2,3,...$.
+
+\textbf{Step 6: } Find the coefficients by applying the initial condition (IC) \\
+Let's apply the IC to find $T_n$. 
+\begin{flalign}
+	v(x,t) = f(x) &= \sum_{n=1}^\infty T_n(0) \, sin\left( \dfrac{n \pi x}{L}\right) \label{b34}\\
+	&\implies T_n(0) = \dfrac{2}{L} \, \int_0^L f(x) \, sin\left(\dfrac{n \pi x}{L}\right) dx  \label{b35}
+\end{flalign}
+In equation \eqref{b34} the $e^{-(b+a^2\lambda^2_n)}$ term falls away becasue $t=0$. And we found equation \eqref{b35}
+via definition of the Fourier Sine Series. 
+
+To solve the original problem, we plug-in the ODE solutions to \eqref{b1}. The solutions to our two ODEs are:
+\begin{flalign}
+	X &= sin(\lambda_n \pi) \\
+	T &= T_n(0)
+\end{flalign}
+
+\textbf{Step 7: } Plug our ODE solutions into our assumed solution (i.e. $V=T(t)X(x)$) \\
+Plugging this into \eqref{b1} we have:
+\begin{flalign}
+	v(x,t) = \sum_{n=1}^\infty T_n(0) \, e^{-(b+a^2\lambda^2)t} \, sin\left( \dfrac{n \pi x}{L}\right)
+\end{flalign}
+with 
+\begin{flalign}
+	T_n(0) = \dfrac{2}{L} \int_0^L f(x) \, sin\left(\dfrac{n \pi x}{L}\right) \, dx
+\end{flalign}
+
+\pagebreak[4]
+\begin{enumerate}[3.]
+\item The following IBVP :
+\end{enumerate}
+
+\begin {align*}
+u_{tt}=c^2u_{xx}, \;\;\;\;\; 0<x<L, \,\,t>0\\
+u\left(x,0\right)=f\left(x\right), \,\,u_t\left(x,0\right)=0 \;\;\;\;\; 0\le x\le L,\\
+u\left(0,t\right)=u\left(L,t\right)=0 \;\;\;\;\; t>0,\\
+f(x)=\begin{cases}
+2hx/L& 0\le x\le L/2\\
+2h\left(L-x\right)/L& L/2\le x\le L,
+\end{cases}
+\end{align*}
+represents a string (both ends fixed)  with the mid-point pulled aside a distance $h$ and released from rest.
+Solve for the displacement $u\left(x,t\right)$ using method of separation of variables.\\
+
+\textbf{Solution: } \\
+First, let's note that since there is a second derivative with respect to $t$ in the PDE, we need two initial conditions (ICs).
+There will be undetermined constants in the solution if we don't specify the second IC.  \\
+
+We can think of $u(x,0) = f(x)$ as the initial displacement, and $u_t(x,0)=0$ as the shape of the initial velocity (
+in this case there is no shape since it equals 0). \\
+
+\textbf{Step 1: Assume the PDE has a Product Solution} \\
+Let's begin solving this problem via separation of variables.  We assume the solution has the following form:
+\begin{flalign}
+	u(x,t) = T(t) \, X(x) \label{3.1}
+\end{flalign}
+
+Let's plug \eqref{3.1} into the given equation.
+\begin{flalign}
+	T_{tt} \, X \, &= \, c^2 \, X_{xx} \\
+	\dfrac{T_{tt}}{c^2 \, T} \, &= \, \dfrac{X_{xx}}{X} = - \lambda ^2 \label{3.3}
+\end{flalign}
+In \eqref{3.3} we're dividing by $XTc^2$, and the $- \lambda^2$ is the separation constant. \\
+
+\textbf{Step 2: Write the Original PDE has Two ODEs} \\
+Let's write out both ODEs.
+\begin{flalign}
+	0 &= X_{xx} + \lambda^2 \,X \label{3.4} \\
+	0 &= T_{tt} + \lambda ^2 c^2 T \label{3.5}
+\end{flalign}
+
+\textbf{Step 3: Solve the first ODE} \\
+Let's solve the first ODE, equation \label{3.4}:
+\begin{flalign}
+	0 &= r^2 \lambda^2  \\
+	r &= \sqrt{i^2 \lambda ^2} \\
+	&= \lambda \, i \label{3.7}
+\end{flalign}
+Recall, the general solution for complex roots is:
+\begin{flalign}
+	y(x) \, = \, c_1 e^{a \, x} \, cos(ux) \, + \, c_2 \, e^{a \,x}sin(ux)
+\end{flalign}
+where
+\begin{flalign}
+	r_{1,2} = a \pm u\, i
+\end{flalign}
+Let's plug equation \eqref{3.7} into the general solution:
+\begin{flalign}
+	y(x) &= c_1 \, e^{0x} \, cos(\lambda x) \, + \, c_2 \, e^{0x} \, sin(\lambda \, x) \\
+	&= c_1 \, cos(\lambda x) \, + \, c_2 \, sin(\lambda x) \label{3.11}
+\end{flalign}
+Now, let's apply the left BC to \eqref{3.11}
+\begin{flalign}
+	0 = v(0) &= c_1 \\
+	&\implies c_1 = 0
+\end{flalign}
+Apply the right BC
+\begin{flalign}
+	0 = v(L) &= c_2 \, sin(\lambda \, L)
+\end{flalign}
+In this equation, $c_1 \, cos(\lambda x)$ falls away because $c_1 = 0$. To avoid the trivial solution 
+(i.e. $u(x,t) = 0)$ we need $c_2 \ne 0$.  Therefore, we need the following:
+\begin{flalign}
+	sin(\lambda L) &= 0 \\
+	&\implies \lambda L = n \pi \; \; \; \; \forall \; n=1,2,3,...\\
+	&\lambda = \dfrac{n \pi}{L}
+\end{flalign}
+Plugging this into \eqref{3.11} we get
+\begin{flalign}
+	X = c_2 \, sin\left(\dfrac{n \pi x}{L}\right)
+\end{flalign}
+
+\textbf{Step 4: Solve the Second ODE} \\
+Now, we can solve the second ODE (equation \eqref{3.5}).  The characteristic equation is:
+\begin{flalign}
+	0 &= r^2 \, + \lambda^2 \, c^2 \\
+	r^2 &= -\lambda^2 c^2 \\
+	r &= \pm \lambda \, c \, i
+\end{flalign}
+
+Plug this into the general solution for complex numbers (equation \eqref{3.11}) we get:
+\begin{flalign}
+	T &= c_1 \, e^{0t}cos(\lambda c t) \, + \, c_2 \, e^{0t} \, sin(\lambda \, c \, t) \\
+	&= c_1 cos(w_n t) + c_2 sin(w_n t)
+\end{flalign}
+Where $w = \lambda_n c = \frac{c n \pi}{L}$.  We denote $\lambda$ with a subscript $n$ because the solution is periodic
+and has infinite solutions. \\
+
+\textbf{Step 5: Plug the ODE Solutions into the Product Solution} \\
+At this point, we can put it all together.
+\begin{flalign}
+	u(x,t) &= \sum_{n=1}^\infty T_n(t) \, X_n(x) \\
+	&= \sum_{n=1}^\infty \left[ A_n sin(w_nt) + B_n cos(w_n t)\right] \; sin\left(\frac{n \pi x}{L}\right) \label{3.25}
+\end{flalign}
+
+\textbf{Step 6: Find the Coefficients by Applying the ICs} \\
+Now, we need to find the coefficients by applying the IC.  Given equation \eqref{3.25}, let's solve for $A_n$ by applying
+the first IC to \eqref{3.25}.
+\begin{flalign}
+	u(x,0) \, = f(x) \, \sum_{n=1}^\infty B_n \, sin\left(\dfrac{n \pi x}{L}\right) \label{3.26}
+\end{flalign}
+
+And now let's apply the second IC to the derivative of \eqref{3.25}.
+\begin{flalign}
+	u_t(x,0) = 0 &= \sum_{n=1}^\infty w_n \, A_n \, cos(w_n \,t) \, sin\left(\dfrac{n \pi x}{L}\right) \\
+	&= \sum_{n=1}^\infty \dfrac{c n \pi}{L} \, A_n \, sin\left(\dfrac{n \pi x}{L}\right) \label{3.28}
+\end{flalign}
+where $w_n = \frac{cn \pi}{L}$ and $cos(w_n,0) = 1$. \\
+
+\textbf{Step 7: Appy Fourier Sine Series} \\
+Notice, that \eqref{3.26} and \eqref{3.28} is a Fourier Sine Series. Recall a Fourier Sine Series, if we have a function
+f(x):
+\begin{flalign}
+	f(x) = \sum_{n=1}^\infty B_n \, sin\left(\dfrac{n \pi x}{L}\right)
+\end{flalign}
+then we can define $B_n$ via the following:
+\begin{flalign}
+	B_n = \dfrac{2}{L} \bigintssss_0^L f(x) sin\left(\dfrac{n \pi x}{L}\right) \, dx \; \; \; \; \forall \; \; n = 1,2,3,... \label{3.30}
+\end{flalign}
+
+Applying \eqref{3.30} to \eqref{3.28} we get the following:
+\begin{flalign}
+	A_n &= \dfrac{2}{L} \, \bigintssss_0^L u_t(x,0) \, sin\left(\dfrac{n \pi x}{L}\right) dx \\
+	&= 0 \label{3.32}
+\end{flalign}
+In \eqref{3.32} we applied the fact that $u_t(x,0)=0$.
+
+And now let's apply \eqref{3.30} to \eqref{3.26}:
+\begin{flalign}
+	B_n &= \dfrac{2}{L} \bigintssss_0^L \, u(x,0) sin\left(\dfrac{n \pi x}{L}\right) \, dx \\
+	&= \dfrac{2}{L} \bigintssss_0^L \, f(x) \, sin\left(\dfrac{n \pi x}{L}\right) \, dx \label{3.34} \\
+	&= \dfrac{2}{L} \left[ \bigintssss_0^{L/2} \dfrac{2 hx}{L} \, sin\left(\dfrac{n \pi x}{L}\right) \, dx + 
+		\bigintssss_{L/2}^L \dfrac{2h(L-X)}{L}  \, sin\left(\dfrac{n \pi x}{L}\right) \, dx \right] \label{3.35} \\
+	&=\dfrac{4h}{L^2} \left[\bigintssss_0^{L/2} x sin\left(\dfrac{n \pi x}{L}\right) \, L \, dx + 
+		\bigintssss_{L/2}^L (L-X) \, sin\left(\dfrac{n \pi x}{L}\right) \, dx \right] \label{3.36} \\
+	&=\dfrac{4h}{L^2} \, \left[ -\dfrac{-L^2}{2 n \pi} \, cos(n \pi) + \dfrac{L^2}{n^2 \pi^2} \, 
+		sin\left(\dfrac{n \pi x}{L}\right) \right]\biggr|_0^{L/2} + ... \notag \\ 
+	& \text{     ...}\left[\dfrac{L^2}{2n \pi} cos\left(\dfrac{n \pi}{2}\right) - \dfrac{L^2}{n^2 \pi^2} \, 
+	sin\left(\dfrac{n \pi x}{L}\right) \right]\biggr|_{L/2}^L \label{3.37} \\
+	&= \dfrac{8h}{n^2 \pi^2} \, sin\left(\dfrac{n \pi}{2}\right) \\
+	&= \begin{cases}
+		0 \; \; \; \text{if} \; \; \; n \; \; \; \text{is even} \\
+		\dfrac{8h(-1)^\frac{n-1}{2}}{n^2 \pi^2} \; \; \; \; \text{if} \; \; \; n \;\; \text{is odd}
+	\end{cases}
+\end{flalign}
+Let's recap what exactly happened. In equation, \eqref{3.35} we replaced the $f(x)$ term with its piecewise equivalent, which was provided in the problem.  In equation \eqref{3.36} we rewrote the previous equation by factoring out the constants (i.e. $2h$ and $L$).  To get to \eqref{3.37} we integrated by parts.
+
+\textbf{Step 8: Plug-in $A_n$ and $B_n$ terms to find solution} \\
+Finally, we'll plug our $A_n$ and $B_n$ terms into equation \eqref{3.25}.  
+\begin{flalign}
+	u(x,t) &= \sum_{n=1}^\infty \left[ A_n \, sin(w_n \, t) + B_n cos(w_n t)\right] \, sin\left(\dfrac{n \pi x}{L}\right)\\ 
+	&= \sum_{n=1}^\infty \left[0* sin(w_n t) + \dfrac{8h(-1)^\frac{n-1}{2}}{n^2 \pi^2} cos(w_n t)\right]
+	sin\left(\dfrac{n \pi x}{L}\right) \\
+	&= \dfrac{8h}{\pi^2} \sum_{n=1}^\infty \dfrac{(-1)^{\frac{n-1}{2}}}{n^2} \, cos(w_n t) \, sin\left(\dfrac{n \pi x}{L}\right)
+\end{flalign}
+Recall that $w_n = \lambda_n c = \frac{c n \pi}{L}$. 
+
+\pagebreak[4]
+\begin{enumerate}[4.]
+\item  A uniform insulated metal bar 1 meter long is stored at room temperature of 20$^{\circ}$ C. An experimenter places one end of the bar in boiling water and the other end in an ice bucket.
+\end{enumerate}
+\begin{enumerate}[(a)]
+\item  Set up an IBVP that models the temperature in the bar.
+\item Solve the IBVP (hint: read  Chapter 3, section 3.2 of Professor Tung's lecture notes).
+\end{enumerate}
+
+\textbf{Solution: } \\
+
+\vspace{1 cm}
+\textbf{Part a:}
+\begin{flalign}
+	&u_t = a^2 \, u_{xx} \; \; \; \; 0 < x < 1, \; \; \; t > 0 \\
+	&u(x,0) = 20 \; \; \; 0 \leq x \leq 1 \\
+	&u(0,t) = 0, \; \; \; u(1,t) = 100, \; \; \; t>0
+\end{flalign}
+
+\vspace{2 cm}
+\textbf{Part b:} \\
+We need to make the problem homogeneous - we can do this by definining a new term $v(x,t)$.
+\begin{flalign}
+	v(x,t) = u(x,t) - \left[T_1 + \frac{X}{L}(T_2-T_1)\right]
+\end{flalign}
+
+\textbf{Step 1: Rewrite the PDE so it's homogeneous} \\
+Plugging in our given numbers we get:
+\begin{flalign}
+	v(x,t) &= u(x,t) - \left[0 + \frac{x}{1}(100-0)\right] \\
+	&= u(x,t) - 100x \label{0.5}
+\end{flalign}
+
+ which gives the following reformulated PDE:
+\begin{flalign}
+	&v_t = a^2 \, v_{xx} \; \; \; \; 0 < x < 1 \; \; \; t>0 \label{4.1}\\
+	&v(0,t) = v(L,t) = 0 \; \; \; \; t>0 \\
+	&v(x,0) = u(x,0) - [T_1 + \frac{X}{L}(T_2 - T_1)] \\
+	&= 20 - 100x
+\end{flalign}
+
+\textbf{Step 2: Assume the PDE has a Product Solution} \\
+Let's solve the PDE by assuming it has the following form:
+\begin{flalign}
+	v= T(t) \, X(x) \label{4.2}
+\end{flalign}
+
+Let's plug \eqref{4.2} into \eqref{4.1}.
+\begin{flalign}
+	T_tX &= a^2 \, TX_{xx} \\
+	\dfrac{T_t}{a^2T} &= \dfrac{X_xx}{x} = -\lambda ^2 \label{4.3}
+\end{flalign}
+In \eqref{4.3} we divided by $a^2TX$ and set the equation equal to a constant ($-\lambda^2$). 
+
+\textbf{Step 3: Write out both ODEs}
+\begin{flalign}
+	0 &= T_t + \lambda^2a^2 T \label{4.4} \\
+	0 &= X_{XX} + \lambda^2 X \label{4.5}
+\end{flalign}
+
+\textbf{Step 4: Solve the ODEs} \\
+Let's begin by solving \eqref{4.5}. The characteristic equation is:
+\begin{flalign}
+	0 &= r^2 + \lambda^2 \\
+	r &= \lambda i
+\end{flalign}
+
+The general solution for complex equations is:
+\begin{flalign}
+	y(t) &= c_1 e^{at} \, cos(ut) + c_2e^{at}\,sin(ut) 
+\end{flalign}
+where $r_{1,2} = a \pm ui$. 
+
+Plugging in our values into the general solution we get:
+\begin{flalign}
+	X= c_1 \, e^{0t} cos(\lambda t) + c_2 \, e^{0t} \, sin(\lambda t) \label{gen sol}
+\end{flalign}
+
+Apply the first BC to \label{gen sol}: $v(0,t) = 0$
+\begin{flalign}
+	0 = c_1
+\end{flalign}
+Apply the second BC to label{gen sol}: $v(1,5) = 0$
+\begin{flalign}
+	0 = c_2 \, sin(\lambda)
+\end{flalign}
+To avoid the trivial solution $sin(\lambda )$ needs to equal 0. Therefore, we get:
+\begin{flalign}
+	0 &= sin(\lambda) \\
+	&\implies \lambda i = n \pi \; \; \; \forall \; n=1,2,3,... \\
+	&\lambda = n \pi
+\end{flalign}
+After applying the BCs, we plug our results (i.e. $\lambda n = \pi$ and $c_1=0$) into \eqref{gen sol}, resulting in:
+\begin{flalign}
+	X= c_2 \, sin(n \pi t)
+\end{flalign}
+ Let's solve the first ODE (equation \eqref{4.4}).  
+\begin{flalign}
+	0=T_t + \lambda^2a^2T
+\end{flalign}
+This is a first order, separable ODE with the following solution:
+\begin{flalign}
+	T = e^{-\lambda^2 a^2 t+c_1}
+\end{flalign}
+Now, let's recall that $c_1 = 0$. 
+
+\textbf{Step 5: Plug ODE solutions into Product Solution} \\
+Plug both solutions into \eqref{4.2}
+\begin{flalign}
+	V &= T(t) X(x) \\
+	&= \sum_{n=1}^\infty A_n e^{-(n \pi a)^2 \, t} sin(n \pi x) \label{4.5}
+\end{flalign}
+where $\lambda = n \pi$. 
+
+\textbf{Step 6: Solve for the coffecients} \\
+Let's solve for $A_n$ by applying the IC.
+\begin{flalign}
+	v(x,0) &= 20 - 100x \\
+	&= \sum_{n=1}^\infty A_n \, sin(n \pi x) \label{5}
+\end{flalign}
+This is a Fourier Sine Series, which can be denoted as:
+\begin{flalign}
+	f(x) = \sum_{n=1}^\infty B_n sin\left(\dfrac{n \pi x}{L}\right)
+\end{flalign}
+where $B_n$ is defined as:
+\begin{flalign}
+	B_n = \dfrac{2}{L} \bigintssss_0^L f(x) \, sin\left(\dfrac{n \pi x}{L}\right) \; \; \; \forall \; \; n=1,2,3,...
+\end{flalign}
+Applying the Fourier Sine Series to \eqref{5} we get:
+\begin{flalign}
+	A_n &= \dfrac{2}{1} \bigintssss_0^L (20-100x) sin(n \pi x) \\
+	&= \dfrac{40}{n \pi} (4(-1)^n -1) \label{fss}
+\end{flalign}
+In \eqref{fss} we integrated by parts. \\
+Plugging this $A_n$ value into \eqref{4.5} we get:
+\begin{flalign}
+	V&=T(t) X(x) \\
+	&=\sum_{n=1}^\infty \dfrac{40}{n \pi} (4(-1)^n -1) \, e^{-(n \pi a)^2 \, t} sin(n \pi x)
+\end{flalign}
+
+\textbf{Step 7: Plug Coefficients into the Solution} \\
+Apply this to the final solution which can be written as:
+\begin{flalign}
+	u(x,t) &= v(x,t) + 100x \label{soln} \\
+	&= \left[\dfrac{40}{\pi} \sum_{n=1}^\infty \dfrac{4(-1)^n-1}{n} e^{-(n \pi a)^2 t} \, sin(n \pi x) \right] +100x
+\end{flalign}
+In equatin \eqref{soln} we simply rewrote equation \eqref{0.5}. 
+\end{document}

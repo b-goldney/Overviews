@@ -1,0 +1,315 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+% This is a package to accept utf8 input.  I normally do not use it in my documents, but it was here by default in Overleaf.
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% These three packages are from the American Mathematical Society and includes all of the important symbols and operations 
+\usepackage{fullpage}
+% By default, an article has some vary large margins to fit the smaller page format.  This allows us to use more standard margins.
+
+\setlength{\parskip}{1em}
+% This gives us a full line break when we write a new paragraph
+
+\usepackage{parskip}
+% This stops new paragraphs from being indented
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{Fourier Sine Series}
+Let's start off by assuming some function, $f(x)$, is odd (i.e. $f(-x) = - f(x)$). Because
+$f(x)$ is odd it makes sense that we can write a series represntation in terms of $sine$
+only (recall $sine$ is odd - look at Taylor Series for it).  What we'll try to do is write
+$f(x)$ as the following series representation, called a Fourier Sine Series on $-L \leq x \leq L$.
+\begin{flalign}
+	f(x) = \sum_{n=1}^\infty b_n sin\left(\dfrac{n \pi x}{L}\right) \label{eq1}
+\end{flalign}
+where $f(x)$ is an odd function and can be approximated by the Fourier Sine Series (i.e.
+the RHS of \eqref{eq1}). \\*
+
+The question now is how to find the coefficient, $b_n$? The following details how to solve for $b_n$. \\*
+\textbf{Step 1: } Multiply both sides by $sin\left(\dfrac{m \pi x}{L}\right)$
+\begin{flalign}
+	f(x) sin\left(\dfrac{m \pi x}{L}\right) = \sum_{n=1}^\infty b_n sin\left(\dfrac{n \pi x}{L}\right) sin\left(\dfrac{m \pi x}{L}\right)
+\end{flalign}
+
+\textbf{Step 2: } Integrate and factor out $b_n$
+\begin{flalign}
+	\int_{-L}^L f(x) sin\left(\dfrac{m \pi x}{L}\right) dx= 
+	b_n \sum_{n=1}^\infty \int_{-L}^L sin\left(\dfrac{n \pi x}{L}\right) sin\left(\dfrac{m \pi x}{L}\right)dx \label{Step 2}
+\end{flalign}
+
+\textbf{Step 3: }Orthogonality of $sin$,  integral of RHS from equation \eqref{Step 2} 
+\begin{flalign}
+	\int_{-L}^L sin\left(\dfrac{n \pi x}{L}\right) sin\left(\dfrac{m \pi x}{L}\right) dx = 
+	\begin{cases}
+		L, \text{if } \; \; \; \; n=m \\
+		0, \text{if } n \; \; \; \; \ne m
+	\end{cases}
+\end{flalign}
+
+\textbf{Step 4: } Rewrite Step 2 replacing $n$ with $m$
+\begin{flalign}
+	&\int_{-L}^L f(x) sin\left(\dfrac{m \pi x}{L})\right dx= b_n \\
+	&b_n = \dfrac{1}{L} \int_{-L}^L f(x) sin\left(\dfrac{m \pi x}{L}\right) dx \\
+	&b_n = \dfrac{2}{L} \int_0^L f(x) sin\left(\dfrac{m \pi x}{L}\right) dx \label{b_m}	
+\end{flalign}
+
+In equation \eqref{b_m} we incorporated the fact about odd integrals (i.e. changing the limits on the integrations).
+Also, we swapped $m$ for $n$ since we only have a non-zero result when $m=n$.
+Let's look at an example.
+
+\textbf{Example 1:} \\*
+Find the Fourier Sine Series of:
+\begin{flalign}
+	f(x) = x \; \; \; \; \text{on } \; -L \leq x \leq L
+\end{flalign}
+
+Plug $x$ into our formula for $b_n$
+\begin{flalign}
+	b_n &= \dfrac{2}{L} \int_0^L x sin\left(\dfrac{n \pi \x}{L}\right) dx \\
+	&= \dfrac{2}{L} \left(\dfrac{L}{n^2 \pi ^2}\right) \left[
+		L \, sin \left(\dfrac{n \pi \x}{L} \right) - n \pi x \; cos \left(\dfrac{n \pi \x}{L} \right) \right] \biggr|_0^L \\
+	&= \dfrac{2}{n^2 \pi ^2} \biggr[ \biggr( L \, sin (n \pi) - n \pi L \; cos \left (\dfrac{n \pi L}{L} \right)
+		- (0-0) \biggr) \biggr] \\
+	&= \dfrac{2}{n^2 \pi ^2} \left[ \left( L \; sin(n \pi) - n \pi L \; cos(n \pi) \right) \right]
+\end{flalign}
+
+We know $n$ is an integer, consequently  $cos(n \pi) = -1^n$; thereore, we can write:
+\begin{flalign}
+	b_n &= \dfrac{2}{n^2 \pi ^2} (-n \pi L) (-1)^n \\
+	&= \dfrac{2L}{n \pi} (-1)^{n+1}
+\end{flalign}
+ 
+The Fourier Sine Series is then
+\begin{flalign}
+	X &= \sum_{n=1}^\infty \dfrac{(-1)^{n+1} 2L}{n \pi} \; \; sin \left(\dfrac{n \pi x}{L} \right) \\
+	&= \dfrac{2L}{\pi} \sum_{n=1}^\infty \dfrac{(-1)^{n+1}}{n} \; \; sin \left(\dfrac{n \pi x}{L} \right)
+\end{flalign}
+
+\pagebreak[4]
+\section{Fourier Cosine series} 
+Let's start by assuming the function $f(x)$ is even (i.e. $f(-x) = f(x))$, and we want to write
+a series representation for this function on $-L \leq x \leq L$ in terms of $cosines$.  In other
+words, we're looking for this:
+\begin{flalign}
+	f(x) = \sum_{n=0}^\infty A_n \; cos\left(\dfrac{n \pi x}{L}i\right) \label{cos 1}
+\end{flalign}
+Note that we're starting with $n=0$, compared to the case with $sine$ since $sin(0) = 0$. \\*
+
+Before diving into the details, let's recall the following fact:
+\begin{flalign}
+	\int_{-L}^L cos \left(\dfrac{n \pi x}{L} \right) \; cos \left(\dfrac{m \pi x}{L} \right) = 
+	\begin{cases}
+		2L \; \; \text{if } \; \; n = m = 0 \\
+		L \; \; \text{if } \; \; n = m \ne 0 \\
+		0 \; \; \text{if } \; \; n \ne m
+	\end{cases}
+\end{flalign}
+
+To derive the coefficients, $A_n$, let's multiply \eqref{cos 1} by $cos\left(\dfrac{m \pi x}{L}\right)$. 
+\begin{flalign}
+	f(x) \; cos\left( \dfrac{m \pi x}{L} \right) = \sum_{n=0}^\infty A_n \, cos \left( \dfrac{n \pi x}{L} \right) 
+		cos\left( \dfrac{m \pi x}{L} \right)
+\end{flalign}
+Integrate and factor the $A_n$ term
+\begin{flalign}
+	\int_{-L}^L f(x) \, cos\left(\dfrac{m \pi x}{L} \right) dx = \int_{-L}^L \sum_{n=0}^\infty
+		A_n \, cos\left(\dfrac{n \pi x}{L} \right) \, cos\left(\dfrac{m \pi x}{L} \right) dx
+\end{flalign}
+
+We know that if $m \ne n$ then the integral equals $0$. Now, there are 2 cases to consider:
+i) $n=m=0$ and ii) $n=m\ne0$. \\*
+\textbf{Case 1: $n=m=0$ }
+\begin{flalign}
+	&\int_{-L}^L f(x) dx = A_0(2L) \\
+	&\implies A_0 = \dfrac{1}{2L} \int_{-L}^L f(x) dx
+\end{flalign}
+
+\textbf{Case 2: $n = m \ne 0$ }
+\begin{flalign}
+	&\int_{-L}^L f(x) cos \left( \dfrac{m \pi x}{L} \right) dx = A_m \, L \\
+	&\implies A_m = \dfrac{1}{L} \int_{-L}^L f(x) cos \left( \dfrac{m \pi x}{L} \right) dx 
+\end{flalign}
+
+To summarize, we can write the following
+\begin{flalign}
+&f(x) = \sum_{n=0}^\infty A_n cos\left( \dfrac{n \pi x}{L} \right) \\
+&\implies A_n = \begin{cases}
+			\frac{1}{2L} \; \int_{-L}^L f(x) dx \; \; \; \; \text{if } n=m=0 \\
+			\frac{1}{L} \; \int_{-L}^L f(x) cos\left(\dfrac{n \pi x}{L} \right) dx 
+					\; \; \; \; \text{if } n =m \ne0
+		\end{cases}	
+\end{flalign}
+
+\pagebreak[4]
+\section{Fourier Series coefficients}
+The goal in this section is to demonstrate how to calculate the coefficients
+in the Fourier Series ($A_0, \, A_n, \, b_n$).
+
+\linebreak
+We'll begin by defining the Fourier Series
+\begin{flalign}
+        f(x) &= A_0 + A_1 \, cos(1x) + A_2 \, cos(2x) + A_3 \, cos(3x) + \ldots 
+        + b_1 \, sin(1x) + b_2 \, sin(2x) + b_3 \, sin(3x) + \ldots \label{eq16}\\
+        &= A_0 + \sum_{n=1}^\infty A_n \, cos(nx) + \sum_{n=1}^\infty b_n \, sin(nx) \label{eq17}
+\end{flalign}
+
+At this point, the formula is straightforward, but we have three coefficient terms (i.e.
+$A_0, \, A_n, \, b_n)$ which are not defined.  Let's proceed to define those three terms. \\*
+
+\textbf{Step 1: Solve for $A_0$} \\*
+To solve this let's integrate both sides of \eqref{eq17} from $-\pi$ to $\pi$.
+
+\begin{flalign}
+        \int_{-\pi}^\pi f(x)dx \, = \, \int_{-\pi}^\pi \underbrace{A_0}_\text{Term 1} dx + \sum_{n=1}^\infty  \int_{-\pi}^\pi 
+                \underbrace{A_n \, cos(nx)}_\text{Term 2} dx 
+                + \sum_{n=1}^\infty \int_{-\pi}^\pi \underbrace{b_n \, sin(nx)}_\text{Term 3} dx 
+\end{flalign}
+
+As a quick preview for how this will play out, Terms 2 and 3 will both reduce to zero leaving us
+with the integral of Term 1 and the LHS of the equation. \\*
+
+Integrate Term 1.
+\begin{flalign}
+        \int_{-\pi}^\pi A_0 \, dx = A_0 X |^\pi _{-\pi} = 2 \pi \, A_0 \label{eq19}
+\end{flalign}
+
+Integrate Term 2.
+\begin{flalign}
+        \sum_{n=1}^\infty \int_{-\pi}^\pi cos(nx) dx &= \sum_{n=1}^\infty sin(nx) |_{-\pi}^\pi \\
+        &= \sum_{n=1}^{\infty} sin(n\pi) + \sum_{n=1}^\infty sin(n \pi) \\
+        &= 0 + 0 \, = 0
+\end{flalign}
+
+Integrate Term 3.
+\begin{flalign}
+        \sum_{n=1}^\infty \int_{-\pi}^\pi b_n \, sin(nx) dx \, &= \, \sum_{n=1}^\infty \, -cos(nx) |_{-\pi}^\pi \\
+        &= -\pi - (-\pi) \\
+        &= 0
+\end{flalign}
+
+Now, Terms 2 and 3 both reduced to 0; so, we're left with the following:
+
+\begin{flalign}
+        \int_{-\pi}^\pi f(x) &= \int_{-\pi}^\pi A_0 dx \label{eq22} \\
+        &= 2 \pi A_0
+\end{flalign}
+
+Isolating the $A_0$ term results in:
+\begin{flalign}
+        A_0 = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(x)
+\end{flalign}
+
+\textbf{Step 2: Let's find the $A_n$ term} \\*
+We'll begin by multiplying each term in \eqref{eq17} by $cos(mx)$, where $m$ is just some constant.
+
+\begin{flalign}
+        &\int_{-\pi}^\pi \underbrace{f(x) cos(mx) \, dx}_\text{Term 1} \, \\ 
+        &= \int_{-\pi}^\pi \underbrace{A_0 cos(mx) \, dx}_\text{Term 2} + 
+        \sum_{n=1}^\infty \int_{-\pi}^\pi \underbrace{A_n cos(nx) \, cos(mx) \, dx}_\text{Term 3} \, + \,  
+        \sum_{n=1}^\infty \int_{-\pi}^\pi \underbrace{b_n sin(nx) cos(mx) \, dx}_\text{Term 4}    
+\end{flalign}
+
+Let's begin by integrating Term 2.
+\begin{flalign}
+        \int_{-\pi}^\pi cos(mx) dx = 0
+\end{flalign}
+
+And then integrating Term 3.
+\begin{flalign*}
+        &A_n \, \int_{-\pi}^\pi cos(nx) \, cos(mx) \, dx \\ 
+        &= \begin{cases}
+                0 \; \; \text{if} \; \; n \ne m \\
+                A_m\pi \; \; \text{if} \; \; n \, = \, m
+        \end{cases}
+\end{flalign*}
+Notice, in the case where $n=m$ we wrote $A_m$ instead of $A_n$ - this is because in the case where
+$n \ne m$ every term equals zero. \\*
+
+Finally integrating Term 4.
+\begin{flalign*}
+        &\int_{-\pi}^\pi sin(nx) cos(mx) \\
+        &= \begin{cases}
+                0 \; \; \text{if} \; \; m \ne n \\
+                0 \; \; \text{if} \; \; m = n
+        \end{cases}
+\end{flalign*}
+
+Putting this all together we have:
+\begin{flalign}
+        A_m \pi &= \int_{-\pi}^\pi f(x) \, cos(mx) \, dx \\
+        A_n &= \dfrac{1}{\pi} \int_{-\pi}^\pi f(x) cos(nx) \label{comp_cos}
+\end{flalign}
+Notice in \eqref{comp_cos} that $A_m$ is rewrote to be $A_n$ -- we're able to do this since we're assuming
+$m=n$.  Recall, if $n \ne m$ then the integral is zero.
+
+\linebreak
+
+\textbf{Step 3: Let's find the $b_n$ terms}
+
+To find the $b_n$ terms we'll multiply \eqref{eq17} by $sin(mx)$, where $m$ is just some constant.
+Rewriting \eqref{eq17} provides:
+
+
+\begin{flalign}
+        &\int_{-\pi}^\pi \underbrace{f(x) sin(mx) \, dx}_\text{Term 1} \, \\ 
+        &= \int_{-\pi}^\pi \underbrace{A_0 sin(mx) \, dx}_\text{Term 2} + 
+        \sum_{n=1}^\infty \int_{-\pi}^\pi \underbrace{A_n cos(nx) \, sin(mx) \, dx}_\text{Term 3} \, + \,  
+        \sum_{n=1}^\infty \int_{-\pi}^\pi \underbrace{b_n sin(nx) \, sin(mx) \, dx}_\text{Term 4}    
+\end{flalign}
+
+Applying similar logic as when we found the $A_n$ terms, we can write the following.  \\*
+\begin{flalign*}
+        &\text{Term 2} \, = 0 \\
+        &\text{Term 3 } \, = 0
+\end{flalign*}
+
+And integrating Term 4 results in:
+\begin{flalign}
+        \int_{-\pi}^\pi sin(nx) \, sin(mx) \, dx &= \\ 
+        &= \begin{cases}
+                0 \, \text{if} \; n \ne m \\
+                \pi \, \text{if} \; n = m
+        \end{cases}
+\end{flalign}
+
+Putting this all together we have:
+\begin{flalign}
+        b_n \, \pi &= \int_{-\pi}^\pi f(x) \, sin(mx) \, dx \\
+        b_n &= \dfrac{1}{\pi} \int_{-\pi}^\pi f(x) \, sin(nx) \, dx 
+\end{flalign}
+Again, notice that we wrote $sin(mx)$ as $sin(nx)$ because we're assuming that $m=n$. \\*
+
+Let's recap all the coefficients.
+\begin{flalign*}
+        A_0 &= \dfrac{1}{2\pi} \int_{-\pi}^\pi f(x) \\
+        A_n &= \dfrac{1}{\pi}  \int_{-\pi}^\pi f(x) \, cos(nx) \, dx \\
+        b_n &= \dfrac{1}{\pi}  \int_{-\pi}^\pi f(x) \, sin(nx) \, dx
+\end{flalign*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 
