@@ -8,3 +8,5 @@
 *.md
 *.bib
 *.cls
+*.aux
+*.log
