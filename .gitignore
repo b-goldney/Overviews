@@ -5,6 +5,7 @@
 *.png
 *.out
 *.o
+*.swp
 # .md, .bib, .cls, aux, log is output from .tex 
 *.md
 *.bib
