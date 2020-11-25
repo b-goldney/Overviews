@@ -4,11 +4,12 @@
 using std::cout;
 using std::endl;
 
-
+// Create Node class which will hold the data and a pointer to the next the
+// Node
 class Node {
     public:
         int data;
-    Node *next;
+        Node *next;
 };
 
 void print_list(Node *n) {
