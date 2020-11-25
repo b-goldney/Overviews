@@ -13,3 +13,4 @@
 *.aux
 *.log
 .DS_Store
+.ccls-cache
