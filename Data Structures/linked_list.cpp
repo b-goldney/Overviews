@@ -12,23 +12,28 @@ class Node {
         Node *next;
 };
 
+// Create function to print each value in the list until it points to NULL
 void print_list(Node *n) {
     while (n != NULL) {
         cout << n->data << " ";
+        cout << &n->data << " <<< address of data increases by 1 each iteration\n";
         n = n->next;
     }
 }
 
 int main()
 {
+    // Create pointers to nodes in list
     Node * head = NULL;
     Node * second = NULL;
     Node * third = NULL;
 
+    // Assign each pointer a class of Node on the heap
     head = new Node();
     second = new Node();
     third = new Node();
 
+    // Populate each node with data and a pointer to the next item in the list
     head->data = 1;
     head->next = second;
 
