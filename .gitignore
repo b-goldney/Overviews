@@ -1,8 +1,4 @@
-<<<<<<< HEAD:.gitignore
 # .gitignore
-=======
-# gitignore
->>>>>>> 312c9e2f6348a2e0fb5fc588679bec3429935118:gitignore.txt
 *.csv
 *.xlsx
 *.xls
