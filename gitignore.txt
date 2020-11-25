@@ -3,4 +3,8 @@
 *.xls
 *.png
 *.out
-*.o 
+*.o
+# .md, .bib, and .cls is output from .tex 
+*.md
+*.bib
+*.cls
