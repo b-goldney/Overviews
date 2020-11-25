@@ -4,9 +4,10 @@
 *.png
 *.out
 *.o
-# .md, .bib, and .cls is output from .tex 
+# .md, .bib, .cls, aux, log is output from .tex 
 *.md
 *.bib
 *.cls
 *.aux
 *.log
+.DS_Store
