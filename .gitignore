@@ -1,0 +1,18 @@
+<<<<<<< HEAD:.gitignore
+# .gitignore
+=======
+# gitignore
+>>>>>>> 312c9e2f6348a2e0fb5fc588679bec3429935118:gitignore.txt
+*.csv
+*.xlsx
+*.xls
+*.png
+*.out
+*.o
+# .md, .bib, .cls, aux, log is output from .tex 
+*.md
+*.bib
+*.cls
+*.aux
+*.log
+.DS_Store
