@@ -53,7 +53,7 @@ void append(Node **head_ref, int new_data) {
     }
 
     // If the node is not empty, find the end of the node
-    while (last->next != NULL)
+    while (last->next != NULL) // when the next node points to NULL then we're at the end of the list
     {
         last = last->next;
 
