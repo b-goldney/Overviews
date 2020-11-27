@@ -20,6 +20,7 @@ class Node {
 
 // Create function, forward_print_list, to print each value in the list until it points to NULL
 void forward_print_list(Node *n) {
+    cout << " forward_print_list called \n";
     while (n != NULL) {
         cout << n->data << " ";
         cout << &n->data << endl;
@@ -39,12 +40,7 @@ void reverse_print_list(Node *n) {
     while (last != NULL) {
         cout << last->data << " <<< " << &last->data << endl;
         last = last->prev;
-         
-        if (last == NULL) {
-            cout << "if called: \n";
-            cout << &last->data <<  " <<< " << &(last->data) << endl;
         }
-    };
     cout << " \n \n ";
 };
 
@@ -56,9 +52,10 @@ void push(Node **head_ref, int new_data) {
     new_node->data = new_data; // save new_data in new_node
     new_node->next = *head_ref; // point new_node->next to head
     new_node->prev = NULL;
-    
-    *head_ref = new_node; // point head to new_node
-};
+    (*head_ref)->prev = new_node; // Assign the "old" head_ref-> prev to the new head_ref
+    *head_ref = new_node; // point head_ref to new_node
+
+    };
 
 // Create function, append, to append an element to the list
 void append(Node **head_ref, int new_data) {
