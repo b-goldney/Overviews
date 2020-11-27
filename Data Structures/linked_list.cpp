@@ -1,13 +1,14 @@
-#include <iostream>
-
-using std::cout;
-using std::endl;
-
 // Purpose: to demonstrate linked lists in c++. We'll create functionality to
 // push a node to the front of the list, and to append a node to the end of the
 // list.
 
 // Example adapted from: https://www.bitdegree.org/learn/linked-list-c-plus-plus
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 
 // Create Node class which will hold the data and a pointer to the next the
 // Node
