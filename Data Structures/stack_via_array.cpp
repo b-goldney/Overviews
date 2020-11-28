@@ -1,4 +1,4 @@
-// Purpose: to demonstrate the stack data structure
+// Purpose: to demonstrate the stack data structure utilizing arrays
 
 // Example adapted from: https://www.geeksforgeeks.org/stack-data-structure-introduction-program/
 
@@ -14,7 +14,7 @@ class Stack {
     private:
         int top;
     public:
-        int a[max]; // max size of Stack
+        int a[max]; // create array and set max size of Stack
         Stack() {top = -1;} // constructor, initializing the top variable
         bool push (int x); // modify the stack by adding an element
         int pop(); // this will modify the stack by removing the top value
