@@ -20,6 +20,7 @@ class Node {
 
 // Create function, print_list, to print each value in the list until it points to NULL
 void print_list(Node *n) {
+    cout << " print_list() called: \n:";
     while (n != NULL) {
         cout << n->data << " ";
         cout << &n->data << endl;
@@ -30,11 +31,18 @@ void print_list(Node *n) {
 
 //  Create function, push, to insert a new node at the front of the list
 void push(Node **head_ref, int new_data) {
-    cout << " push called \n";
+    cout << " push called: \n";
+    printf("*head_ref before pushing new element:  %p\n", *head_ref);
+    printf("&(**head_ref) before pushing new element, matches address of current head:  %p\n", &(**head_ref));
+
     Node *new_node = new Node(); // Create new node
     new_node->data = new_data; // save new_data in new_node
     new_node->next = *head_ref; // point new_node->next to head
     *head_ref = new_node; // point head to new_node
+
+    printf("&(**head_ref) after pushing new element, matches address of new head: %p \n", &(**head_ref));
+    printf("**head_ref after pushing new element:  %d\n\n", **head_ref);
+
 };
 
 // Create function, append, to append an element to the list
@@ -91,15 +99,21 @@ int main()
 
     // push 0 onto the front of the list so the new list is 0->1->2->3
     push(&head, 0);
-
+    
     print_list(head); // print list to confirm it's created accurately
     // Notice, the address of 0 is still 1 ahead of 3, because the 0 was
     // created after 3.  Even though 0 is at the front of the list, its address
     // is after the list elements created before it.
-    
+   
+    push(&head, 99);
+
     append(&head, 4);
 
     print_list(head);
+
+
+    int *ptr = NULL;
+    printf("Value of &ptr: %p\n", ptr);
 
     return 0;
 }
