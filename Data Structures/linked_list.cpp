@@ -20,10 +20,10 @@ class Node {
 
 // Create function, print_list, to print each value in the list until it points to NULL
 void print_list(Node *n) {
-    cout << " print_list() called: \n:";
+    cout << "print_list() called: \n";
     while (n != NULL) {
-        cout << n->data << " ";
-        cout << &n->data << endl;
+        printf("   n->data: %d \n", n->data);
+        printf("   &n->data: %s \n", &n->data);
         n = n->next;
     }
     cout << " \n \n ";
@@ -31,17 +31,19 @@ void print_list(Node *n) {
 
 //  Create function, push, to insert a new node at the front of the list
 void push(Node **head_ref, int new_data) {
-    cout << " push called: \n";
-    printf("*head_ref before pushing new element:  %p\n", *head_ref);
-    printf("&(**head_ref) before pushing new element, matches address of current head:  %p\n", &(**head_ref));
+    printf("   (**head_ref) before pushing new element, matches address of current head:  %p\n", (**head_ref));
+    printf(" &(*head_ref): %p  <<< this doesn't change \n", &(*head_ref));
+    printf(" *head_ref: %p \n\n" , *head_ref);
 
     Node *new_node = new Node(); // Create new node
     new_node->data = new_data; // save new_data in new_node
     new_node->next = *head_ref; // point new_node->next to head
     *head_ref = new_node; // point head to new_node
 
-    printf("&(**head_ref) after pushing new element, matches address of new head: %p \n", &(**head_ref));
-    printf("**head_ref after pushing new element:  %d\n\n", **head_ref);
+    printf(" &(*head_ref): %p <<< this doesn't change\n", &(*head_ref));
+    cout << " *head_ref: " << *head_ref << " <<< *head_ref is now the address of the inserted data"
+        << endl << endl;
+
 
 };
 
@@ -53,7 +55,7 @@ void append(Node **head_ref, int new_data) {
     new_node->data = new_data;
     new_node->next = NULL; // assign value of NULL since this will be the last node
 
-    cout << " append called, notice how the memory is sequential with respect to the order it was created\n";
+    cout << "append called, notice how the memory is sequential with respect to the order it was created\n";
     // Check if list is empty, if so, make this Node first
     if (*head_ref == NULL)
     {
