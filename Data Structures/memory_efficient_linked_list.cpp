@@ -56,9 +56,8 @@ void insert(Node **head_ref, int data)
     // Print statements to better understand what's happening
     printf(" &new_node: %p\n", &new_node);
     printf(" &(new_node->data): %p\n", &(new_node->data));
-    printf(" &(new_node->npx): %p\n", &(new_node->npx));
     printf(" &(*head_ref): %p  <<< this doesn't change \n", &(*head_ref));
-    printf(" *head_ref: %p \n\n" , *head_ref);
+    printf(" *head_ref: %p <<< same address as &(*head_ref)->npx below \n \n" , *head_ref);
 
     // If linked list is not empty, then npx of  current head node will be XOR of new node 
     // and node next to current head if (*head_ref != NULL) 
@@ -71,8 +70,7 @@ void insert(Node **head_ref, int data)
     // Change head 
     *head_ref = new_node;
 
-    printf(" &(new_node->data): %p\n", &(new_node->data));
-    printf(" &(*head_ref)->npx): %p <<< this is the address from *head_ref \n", &(*(new_node)->npx));
+    printf(" &(*head_ref)->npx): %p <<< This is the address of &(new_node->data) from the prior node \n", &(*(new_node)->npx));
     printf(" &(*head_ref): %p <<< this doesn't change\n", &(*head_ref));
     cout << " *head_ref: " << *head_ref << " <<< *head_ref is now the address of the inserted data"
         << endl << endl;
@@ -93,14 +91,68 @@ void printList (Node *head)
         cout<<curr->data<<" \n"; 
  
         // get address of next node: curr->npx is next^prev, so curr->npx^prev will be 
-        // next^prev^prev which is next 
+        // next^prev^prev which is next
+        cout << prev << " <<< prev \n";
         next = XOR (prev, curr->npx); 
  
         // update prev and curr for next iteration 
         prev = curr; 
-        curr = next; 
+        curr = next;
+
+        if (curr == NULL)
+        {
+            cout << "curr is NULL \n";
+        };
     } 
-} 
+}
+
+void reversePrintList(Node *head)
+{
+    cout << "reversePrintList called \n";
+    
+    Node *curr = head; 
+    Node *prev = NULL; 
+    Node *next; 
+ 
+    while (next != NULL) 
+    { 
+        // get address of next node: curr->npx is next^prev, so curr->npx^prev will be 
+        // next^prev^prev which is next
+        next = XOR (prev, curr->npx); 
+ 
+        // update prev and curr for next iteration 
+        if (next != NULL)
+        {
+            prev = curr; 
+            curr = next;
+        };
+
+        if (next == NULL)
+        {
+            cout << "next is NULL \n";
+            cout << curr->data << " <<< curr->data \n";
+            
+            Node *temp;
+            temp = XOR(prev->npx, prev);
+
+            next = XOR(prev->npx, temp);
+            cout << next->data << " <<< next->data \n";
+            prev = curr;
+            curr = next;
+
+            while (next != NULL)
+            {
+                next = XOR(prev, curr->npx);
+                if (next != NULL) {
+                    cout << next->data << " <<< next->data \n \n";
+                    prev = curr;
+                    curr = next;
+                };
+            };
+        };
+    } 
+    cout << "\n \n";
+}
  
 // Driver code 
 int main () 
@@ -113,8 +165,12 @@ int main ()
     insert(&head, 30); 
     insert(&head, 40); 
  
-    // print the created list 
+    // print the created list
+    cout << " \n \n \n";
     printList (head); 
- 
+    
+    cout << " \n \n \n";
+    reversePrintList(head);
+
     return (0); 
 } 
