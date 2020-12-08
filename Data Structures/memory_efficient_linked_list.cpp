@@ -1,7 +1,7 @@
 //Purpose: to demonstrate a memory efficient doubly linked list.
 //Recall,  a normal doubly linked list uses two memory spaces to hold 
 //the address of the next and previous nodes.
-//
+
 // Note, the printf statements have indented text to increase the readability
 // on the terminal, after running the program.
 
@@ -112,46 +112,31 @@ void reversePrintList(Node *head)
     
     Node *curr = head; 
     Node *prev = NULL; 
-    Node *next; 
- 
-    while (next != NULL) 
+    Node *next = NULL;
+    
+    while (curr != NULL) 
     { 
         // get address of next node: curr->npx is next^prev, so curr->npx^prev will be 
         // next^prev^prev which is next
         next = XOR (prev, curr->npx); 
  
         // update prev and curr for next iteration 
-        if (next != NULL)
-        {
-            prev = curr; 
-            curr = next;
-        };
+        prev = curr; 
+        curr = next;
+    };
 
-        if (next == NULL)
-        {
-            cout << "next is NULL \n";
-            cout << curr->data << " <<< curr->data \n";
-            
-            Node *temp;
-            temp = XOR(prev->npx, prev);
+    while ( prev != NULL) 
+    {
+        cout << prev->data << " <<< prev->data \n";
 
-            next = XOR(prev->npx, temp);
-            cout << next->data << " <<< next->data \n";
-            prev = curr;
-            curr = next;
-
-            while (next != NULL)
-            {
-                next = XOR(prev, curr->npx);
-                if (next != NULL) {
-                    cout << next->data << " <<< next->data \n \n";
-                    prev = curr;
-                    curr = next;
-                };
-            };
-        };
-    } 
-    cout << "\n \n";
+        // get address of next node: curr->npx is next^prev, so curr->npx^prev will be 
+        // next^prev^prev which is next
+        next = XOR (prev->npx, curr); 
+ 
+        // update prev and curr for next iteration 
+        curr = prev;
+        prev = next; 
+    };
 }
  
 // Driver code 
@@ -163,7 +148,8 @@ int main ()
     insert(&head, 10); 
     insert(&head, 20); 
     insert(&head, 30); 
-    insert(&head, 40); 
+    insert(&head, 40);
+    insert(&head, 50);
  
     // print the created list
     cout << " \n \n \n";
