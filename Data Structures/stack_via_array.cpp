@@ -1,5 +1,7 @@
 // Purpose: to demonstrate the stack data structure utilizing arrays
 
+// Functionality: push, pop, peek, print, isEmpty
+
 // Example adapted from: https://www.geeksforgeeks.org/stack-data-structure-introduction-program/
 
 #include <iostream>

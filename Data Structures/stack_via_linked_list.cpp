@@ -3,6 +3,8 @@
 // printed liberally to make it easy to follow how attributes are being
 // updated.
 
+// Functionality: push, pop, peek, print, isEmpty 
+
 // Example adapted from: https://www.geeksforgeeks.org/stack-data-structure-introduction-program/
 
 #include <iostream>

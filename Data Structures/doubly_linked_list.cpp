@@ -2,6 +2,8 @@
 // push a node to the front of the list, and to append a node to the end of the
 // list. This code is simply an extension of the linked_list.cpp file.
 
+// Functionality: forward print, reverse print, append, push
+
 // Example adapted from: https://www.bitdegree.org/learn/linked-list-c-plus-plus
 
 #include <iostream>

@@ -2,6 +2,8 @@
 // push a node to the front of the list, and to append a node to the end of the
 // list.
 
+// Functionality: push, append, print
+
 // Example adapted from: https://www.bitdegree.org/learn/linked-list-c-plus-plus
 
 #include <iostream>

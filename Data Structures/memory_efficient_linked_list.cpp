@@ -2,6 +2,8 @@
 //Recall,  a normal doubly linked list uses two memory spaces to hold 
 //the address of the next and previous nodes.
 
+// Functionality: insert, print, reverse print
+
 // Note, the printf statements have indented text to increase the readability
 // on the terminal, after running the program.
 
