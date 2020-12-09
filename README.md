@@ -1,6 +1,9 @@
 # Overviews
 A working collection of personal notes.
 
+### C++ Test Code
+- A compilation of code attempting to clarify various topics 
+
 ### Data Structures
 - Contains two subdirectories: i) ordered data structures and ii) unordered data structures
 - Ordered data structures
