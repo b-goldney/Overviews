@@ -13,4 +13,8 @@
   - stack_via_array
     - Functionality: push, pop, peek, print, isEmpty
   - stack_via_linked_list
-    - Functionality: push, pop, peek, print, isEmpty 
+    - Functionality: push, pop, peek, print, isEmpty
+
+- Binary Search Tree
+  - bst.cpp - minimal changes incorporated from original source (see code for
+    link)
