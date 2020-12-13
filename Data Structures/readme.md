@@ -1,0 +1,16 @@
+# Ordered Data Structures
+- Queue
+  - array_based_queue.cpp
+    - Functionality: enqueue, dequeue, isFull, isEmpty, front, rear
+- Lists
+  - linked_list.cpp
+    - Functionality: push, append, print
+  - doubly_linked_list.cpp
+    - Functionality: forward print, reverse print, append, push
+  - memory_efficient_linked_list.cpp
+    - Functionality: insert, print, reverse print
+- Stack
+  - stack_via_array
+    - Functionality: push, pop, peek, print, isEmpty
+  - stack_via_linked_list
+    - Functionality: push, pop, peek, print, isEmpty 
