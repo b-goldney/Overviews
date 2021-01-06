@@ -1,7 +1,7 @@
 # Overviews
 A working collection of personal notes.
 
-### C++ Test Code
+### Test Code
 - A compilation of code attempting to clarify various topics 
 
 ### Data Structures
