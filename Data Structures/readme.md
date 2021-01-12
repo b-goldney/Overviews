@@ -1,23 +1,11 @@
 ## Ordered Data Structures
 - Queue
-  - array_based_queue.cpp
-    - Functionality: enqueue, dequeue, isFull, isEmpty, front, rear
+  - array based queue
 - Lists
-  - linked_list.cpp
-    - Functionality: push, append, print
-  - doubly_linked_list.cpp
-    - Functionality: forward print, reverse print, append, push
-  - memory_efficient_linked_list.cpp
-    - Functionality: insert, print, reverse print
+  - linked list, doubly linked list, memory efficient linked list
 - Stack
-  - stack_via_array.cpp
-    - Functionality: push, pop, peek, print, isEmpty
-  - stack_via_linked_list.cpp
-    - Functionality: push, pop, peek, print, isEmpty
-
+  - stack built with arrays, stack built with linked lists
 - Binary Search Tree
-  - bst.cpp - minimal changes incorporated from original source (see code for
-    link)
 
 ## Unordered Data Structures
 - has_function.cpp
