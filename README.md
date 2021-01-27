@@ -2,7 +2,7 @@
 A working collection of personal notes.
 
 ### Test Code
-- A compilation of code attempting to clarify various topics 
+- A compilation of code clarifying various topics 
 
 ### Data Structures
 - Contains two subdirectories: i) ordered data structures and ii) unordered data structures
