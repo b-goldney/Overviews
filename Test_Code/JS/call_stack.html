@@ -1,0 +1,41 @@
+<!-- 
+Purpose: demonstrate how callback functions are executed
+Example adapted from Andrew Mead's "The Complete Node.js Developer Course"
+on Udemy
+
+Takeaway: the zeroSecondTimer executes after the console.log('Stop'), which
+counterintuitive since it's paused for zero seconds.  The reason why it's
+executed after 'stop' is because asynchronous functions have to be sent to
+the callback queue 
+
+Note, this code is put into a .html file so that it can easily be run in
+Chrome, enabling easy use of debugging.
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  </head>
+  <body>
+    <!-- lots of HTML here -->
+    <script>
+      console.log('Start')
+
+      twoSecondTimer = () => {
+              console.log('2 second timer')
+            }
+      setTimeout(twoSecondTimer, 2000);
+     
+      zeroSecondTimer = () => {
+              console.log('0 second timer')
+            }
+      setTimeout(zeroSecondTimer, 0);
+     
+      console.log('End')
+    </script>
+  </body>
+</html>
+
