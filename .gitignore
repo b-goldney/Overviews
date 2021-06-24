@@ -14,3 +14,5 @@
 *.log
 .DS_Store
 .ccls-cache
+.ipynb_checkpoints
+.ipynb_checkpoints/
