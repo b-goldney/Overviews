@@ -1,0 +1,147 @@
+
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+% This is a package to accept utf8 input.  I normally do not use it in my documents, but it was here by default in Overleaf.
+
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% These three packages are from the American Mathematical Society and includes all of the important symbols and operations 
+
+\usepackage{fullpage}
+% By default, an article has some vary large margins to fit the smaller page format.  This allows us to use more standard margins.
+
+\setlength{\parskip}{1em}
+% This gives us a full line break when we write a new paragraph
+
+\usepackage{parskip}
+% This stops new paragraphs from being indented
+\usepackage{xcolor}
+
+\begin{document}
+\section{ARCH Models - Introduction}
+An ARCH(1) Process has the following properties:
+
+\begin{flalign*}
+    r_t &= \sigma_t e_t \\
+    e_t &= \text{white noise}(0,1) \\
+    \sigma_t &= \sqrt{\omega + \alpha_1 r^2_{t-1}}
+\end{flalign*} 
+
+The conditional mean (given the past) of $r_t$ is:
+\begin{flalign}	
+    E(r_t | r_{t-1}, r_{t-2}, ... ) &= E( \sigma_t \, e_t | r_{t-1}, r_{t-2}, ...) \label{eq1} \\
+                                    &= \sigma_t \, E(e_t \, | r_{t-1}, r_{t-2}, ...) \label{eq2} \\
+                                    &= \sigma_t * 0 = 0 \label{eq3}       
+\end{flalign}
+
+Applying the law of iterated expectations (LIE), the unconditional mean is:
+\begin{flalign}
+    E(r_t) \, &= \, E[E(r_t \, | \, r_{t-1}, r_{t-2}, ...)] \label{eq4} \\
+              &= E(0) = 0 \label{eq5}
+\end{flalign}
+
+Based off equation \eqref{eq5} we can see the ARCH(1) process has a 0 mean.
+
+Demonstrate the ARCH(1) process is serially uncorrelated:
+\begin{flalign}
+    E(r_t \, \, r_{t-1}) &= E[E(r_t , r_{t-1} \, | \, r_{t-1}, r_{t-2}, ...)] \label{eq6} \\
+                         &= E[r_{t-1}E(r_{t-1} | r_{t-1}, r_{t-2}, ...)] \label{eq7} \\
+                         &= E(r_{t-1} * 0) = 0
+\end{flalign}
+
+
+Therefore, the covariance between $r_t$ and $r_{t-1}$ is:
+\begin{flalign}
+    cov(r_t, r_{t-1}) &= E(r_t * r_{t-1}) - E(r) \, E(r_{t-1}) \label{eq9} \\
+                      &= 0
+\end{flalign}
+
+
+In equation \eqref{eq9}, we're simply applying the definition of covariance.
+\begin{flalign*}
+    cov(X,Y) = E(XY) - E(X)\, E(Y)
+\end{flalign*}
+
+Because the covariance is zero, $r_t$ can't be predicted using its history
+(i.e. $r_{t-1}, r_{t-2}, ...$), which is evidence for the EMH.  But, $r^2$
+can be predicted. Let's show the conditional variance of $r_t$.
+\begin{flalign}
+    var(r_t \, | \, r_{t-1}, r_{t-2}, ..) &= E(r_t^2 | r_{t-1}, r_{t-2}, ..) \label{eq11} \\
+                                          &= E(\sigma^2 \, e^2_t | r_{t-1},r_{t-2}, ..) \label{eq12} \\
+                                          &= \sigma_t^2 E(e_t^2 | r_{t-1}, r_{t-2}, ..) \label{eq13} \\
+                                          &= \sigma_t^2 * 1 = \sigma_t^2 \label{eq14}
+\end{flalign}
+
+\begin{itemize}
+    \itemsep-1em 
+    \item In equation \eqref{eq11}, we applied $r_t = \sigma_t \, e_t$ \\
+    \item In equation \eqref{eq12}, we pulled out $\sigma^2$ since it's
+        dependent on historical data \\
+    \item In equation \eqref{eq13}, we applied $var(e_t) \sim (0,1)$
+\end{itemize}
+
+So, $\sigma^2_t$, represents the conditional variance, which by definition is a
+function of history.  Recall:
+\begin{flalign}
+    &\sigma^2_t = \omega + \alpha_1 r^2_{t-1} \label{eq15} \\
+    &\sigma_t = \sqrt{\omega + \alpha_1 r^2_{t-1}} \label{eq16} \\
+\end{flalign}
+
+By rewriting the left-hand side of equation \eqref{eq11} and applying
+equation \eqref{eq15}, we have :
+\begin{flalign}
+    E(r^2_t | r_{t-1}, r_{t-2}, ... ) = \omega + \alpha_1 r^2_{t-1} \label{eq17} 
+\end{flalign}
+
+Equation \eqref{eq17} implies we can estimate $\omega$ and $\alpha_1$ by
+regressing $r^2_t$ onto an intercept term and $r^2_{t-1}$. It also implies that
+$r^2_t$ follows an ARCH(1) process.
+
+Now, let's look at unconditional variance (why we're looking at this will make
+sense in the next part).
+\begin{flalign}
+    var(r_t) &= E(r^2_t) - [E(r_t)]^2 = E(r^2_t) \label{eq18} \\
+             &= E[E(r^2_t | r_{t-1}, r_{t-2}, ... )] \label{eq19} \\
+             &= E(\omega + \alpha_1 r^2_{t-1}) \label{eq20} \\
+             &= \omega + \alpha_1 E(r^2_{t-1}) \label{eq21} \\
+\end{flalign}
+
+In equation \eqref{eq18}, that is the definition of variance. Therefore, we can write:
+\begin{flalign}
+    \sigma^2_t &= \omega + \alpha_1 r^2_{t-1} \label{eq24} \\
+               &= \omega + \alpha_1 \sigma^2_t \label{eq25} \\
+        \omega &= \sigma^2 (1 - \alpha_1)\label{eq26} \\
+    \sigma^2 &= \frac{\omega}{1-\alpha_1} \label{eq27} \\
+\end{flalign}
+
+
+\begin{itemize}
+    \itemsep0em 
+    \item Equation \eqref{eq20}, applied the LIE
+    \item Equation \eqref{eq21}, applied equation \eqref{eq17} 
+    \item Equation \eqref{eq24}, applied the result of equation \eqref{eq14}
+    \item Equation \eqref{eq25}, substituted $\sigma^2_t$ for $\sigma^2_{t-1}$
+        because this is the unconditional variance
+    \item Equation \eqref{eq26} factored $\sigma^2$ out of $\sigma^2 - \alpha_1
+        \sigma^2$
+    \item Note, equation \eqref{eq27} holds if $0 < a < 1$
+\end{itemize}
+
+Rewriting equation \eqref{eq27} we have $\omega = \sigma^2(1 - \alpha_1)$. 
+Plugging this into equation \eqref{eq17}, $\sigma^2_t = \omega + \alpha_1
+r^2_{t-1}$, we have:
+\begin{flalign}
+    \sigma^2_t = \sigma^2 + \alpha_1 (r^2_{t-1} - \sigma^2) \label{eq28} 
+\end{flalign}
+
+So, conditional variance is a combination of unconditional variance and
+deviation of squared error from its average value. We obtain an ARCH(p) process
+if $r^2_t$ follows an AR(p) process: $\sigma^2 = \omega + \sum_{i=1}^p \alpha_1
+r^2_{t-i}$
+
+
+\end{document}
+
